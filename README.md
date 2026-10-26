@@ -23,8 +23,8 @@ Built by [Omprakash Suthar (@OPBSUTHAR)](https://github.com/OPBSUTHAR).
 | **Android** | Signed APK, Android 8+ | [omnia.apk](https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk) |
 | **Windows** | NSIS installer, 64-bit | [omnia-windows.exe](https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe) |
 | **Linux** | Portable AppImage, x86_64 | [omnia-linux.AppImage](https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage) |
-| **Web** | Full React app | [omnia-opbsuthar.vercel.app](https://omnia-opbsuthar.vercel.app/) |
-| **iPhone / iPad** | Safari → Share → Add to Home Screen | [Web app](https://omnia-opbsuthar.vercel.app/) |
+| **Web** | Full React app | [omnia-suthara.vercel.app](https://omnia-suthara.vercel.app/) |
+| **iPhone / iPad** | Safari → Share → Add to Home Screen | [Web app](https://omnia-suthara.vercel.app/) |
 
 Step-by-step instructions live at **[opbsuthar.github.io/omnia](https://opbsuthar.github.io/omnia/)**.
 The download links also appear in the footer of every app screen.

@@ -45,7 +45,7 @@ const feed = {
   apkUrl: `${repo}/releases/latest/download/omnia.apk`,
   windowsUrl: `${repo}/releases/latest/download/omnia-windows.exe`,
   linuxUrl: `${repo}/releases/latest/download/omnia-linux.AppImage`,
-  webUrl: 'https://omnia-opbsuthar.vercel.app/',
+  webUrl: 'https://omnia-suthara.vercel.app/',
   docsUrl: 'https://opbsuthar.github.io/omnia/',
   releasesUrl: versionedRelease,
   mandatory: false,

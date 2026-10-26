@@ -657,7 +657,7 @@ h2 {
   }
 
   .hero-actions .button {
-    flex: 1;
+    flex: 1 1 100%;
     min-width: 150px;
   }
 

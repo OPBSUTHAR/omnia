@@ -11,7 +11,7 @@
   "apkUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk",
   "windowsUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe",
   "linuxUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage",
-  "webUrl": "https://omnia-opbsuthar.vercel.app/",
+  "webUrl": "https://omnia-suthara.vercel.app/",
   "docsUrl": "https://opbsuthar.github.io/omnia/",
   "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases",
   "mandatory": false

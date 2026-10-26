@@ -6,7 +6,7 @@ export const RELEASES_LATEST_URL = `${REPO_URL}/releases/latest`;
 export const ISSUES_URL = `${REPO_URL}/issues`;
 
 /** The full app lives on Vercel. GitHub Pages is the install guide. */
-export const APP_WEB_URL = 'https://omnia-opbsuthar.vercel.app/';
+export const APP_WEB_URL = 'https://omnia-suthara.vercel.app/';
 export const DOCS_URL = `https://${GITHUB_OWNER.toLowerCase()}.github.io/${REPO_NAME}/`;
 export const WEB_URL = APP_WEB_URL;
 
