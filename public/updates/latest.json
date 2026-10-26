@@ -1,18 +1,17 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "releasedAt": "2026-10-26",
   "notes": [
-    "Real Windows and Linux desktop installers built with Electron",
-    "The full web app now runs on Vercel; GitHub Pages is the install guide",
-    "Downloads live in the global app footer with direct links",
-    "Update dialog selects the right installer for each platform",
-    "Fixes for the desktop sidebar and mobile settings layout"
+    "Phone home stats now fit on one compact row instead of stacking into three sparse bars.",
+    "Fixed the blank space after the focus timer on Android: the converter and scratchpad now render at their full height.",
+    "Toolkit cards and tool panels no longer collapse on narrow phone screens.",
+    "Cleared the Expo export cache so update checks always compare the real installed version."
   ],
   "apkUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk",
   "windowsUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe",
   "linuxUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage",
   "webUrl": "https://omnia-suthara.vercel.app/",
   "docsUrl": "https://opbsuthar.github.io/omnia/",
-  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.1.0",
+  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.2.0",
   "mandatory": false
 }
