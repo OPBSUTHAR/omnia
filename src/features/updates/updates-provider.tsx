@@ -18,7 +18,13 @@ import { useSettings } from '@/features/settings/settings-provider';
 import { getFeedUrl, compareVersions, isValidVersion } from '@/features/updates/feed';
 import type { UpdateCheckStatus, UpdateFeed } from '@/features/updates/types';
 import { useToast } from '@/components/ui/toast';
-import { LATEST_APK_URL, WEB_URL } from '@/lib/links';
+import {
+  LATEST_APK_URL,
+  LATEST_LINUX_URL,
+  LATEST_WINDOWS_URL,
+  WEB_URL,
+} from '@/lib/links';
+import { getDesktopPlatform, isElectron } from '@/lib/device';
 
 const CURRENT_VERSION = Constants.expoConfig?.version ?? '1.0.0';
 const DISMISSED_KEY = 'omnia.updates.dismissed.v1';
@@ -54,7 +60,10 @@ function normalizeFeed(value: unknown): UpdateFeed | null {
     releasedAt: typeof raw.releasedAt === 'string' ? raw.releasedAt : undefined,
     notes,
     apkUrl: typeof raw.apkUrl === 'string' ? raw.apkUrl : undefined,
+    windowsUrl: typeof raw.windowsUrl === 'string' ? raw.windowsUrl : undefined,
+    linuxUrl: typeof raw.linuxUrl === 'string' ? raw.linuxUrl : undefined,
     webUrl: typeof raw.webUrl === 'string' ? raw.webUrl : undefined,
+    docsUrl: typeof raw.docsUrl === 'string' ? raw.docsUrl : undefined,
     releasesUrl: typeof raw.releasesUrl === 'string' ? raw.releasesUrl : undefined,
     mandatory: raw.mandatory === true,
   };
@@ -203,10 +212,25 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
 
   const installUpdate = useCallback(async () => {
     if (!feed) return;
+
+    // In a browser/PWA the newest build is already deployed, so a reload is
+    // the update. Desktop and Android download a real installer.
+    if (Platform.OS === 'web' && !isElectron()) {
+      setModalVisible(false);
+      if (typeof window !== 'undefined') window.location.reload();
+      return;
+    }
+
+    const desktop = getDesktopPlatform();
     const target =
       Platform.OS === 'android'
         ? feed.apkUrl ?? LATEST_APK_URL
-        : feed.webUrl ?? WEB_URL;
+        : desktop === 'windows'
+          ? feed.windowsUrl ?? LATEST_WINDOWS_URL
+          : desktop === 'linux'
+            ? feed.linuxUrl ?? LATEST_LINUX_URL
+            : feed.webUrl ?? WEB_URL;
+
     try {
       if (Platform.OS === 'web' && typeof window !== 'undefined') {
         window.open(target, '_blank', 'noopener,noreferrer');
@@ -216,7 +240,9 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
       showToast(
         Platform.OS === 'android'
           ? 'Download started — open the APK to install over Omnia.'
-          : 'Opening the latest build in a new tab.',
+          : desktop
+            ? 'Download started — run the installer to update Omnia.'
+            : 'Opening the latest build in a new tab.',
         { kind: 'success' }
       );
       setModalVisible(false);

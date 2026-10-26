@@ -1,8 +1,9 @@
 # Releasing Omnia
 
-Omnia is released from a version tag. The tag drives three things at once: the signed
-Android APK, the public update feed and the web deployment. Installed apps discover the
-release through the feed and show the in-app update dialog.
+Omnia is released from a version tag. One tag drives the signed Android APK, the Windows
+installer, the Linux AppImage, the public update feed, the Vercel deployment and the
+GitHub Pages guide. Installed apps discover the release through the feed and show the
+in-app update dialog.
 
 ## One-time setup
 
@@ -35,10 +36,15 @@ gh secret set ANDROID_KEY_ALIAS --repo OPBSUTHAR/omnia --body "omnia"
 gh secret set ANDROID_KEY_PASSWORD --repo OPBSUTHAR/omnia --body "<password>"
 ```
 
-### 3. GitHub Pages
+Desktop builds are currently unsigned. No certificate secret is required.
 
-Repository → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-The first push to `main` deploys `https://opbsuthar.github.io/omnia/`.
+### 3. Hosting
+
+- **Vercel:** import `OPBSUTHAR/omnia`, framework preset **Other**, build
+  `npm run build:web:routes`, output `dist`. `vercel.json` already contains these
+  settings.
+- **GitHub Pages:** repository → **Settings → Pages → Source: GitHub Actions**. The
+  `Deploy docs` workflow publishes `site/`.
 
 ## Cutting a release
 
@@ -46,8 +52,8 @@ The first push to `main` deploys `https://opbsuthar.github.io/omnia/`.
 2. Bump the version and write notes:
 
    ```bash
-   npm run release:patch -- "What changed for users" "Second note"
-   # or release:minor / release:major
+   npm run release:minor -- "Windows and Linux desktop installers" "Downloads in the app footer"
+   # or release:patch / release:major
    ```
 
    This updates `package.json`, `app.json` (`version`, Android `versionCode`, iOS
@@ -63,8 +69,8 @@ The first push to `main` deploys `https://opbsuthar.github.io/omnia/`.
 
    ```bash
    git add -A
-   git commit -m "release: v1.2.3"
-   git tag v1.2.3
+   git commit -m "release: v1.1.0"
+   git tag v1.1.0
    git push origin main --tags
    ```
 
@@ -75,23 +81,47 @@ The first push to `main` deploys `https://opbsuthar.github.io/omnia/`.
    gh run watch --repo OPBSUTHAR/omnia
    ```
 
-6. Wait for `android-release` to finish. It publishes
-   `https://github.com/OPBSUTHAR/omnia/releases/tag/v1.2.3` with `omnia.apk`, then
-   commits the refreshed `public/updates/latest.json`.
+6. Wait for `release.yml` (jobs: Android, Windows desktop, Linux desktop, Publish). It
+   publishes `https://github.com/OPBSUTHAR/omnia/releases/tag/vX.Y.Z` with:
 
-7. Verify:
+   - `omnia.apk`
+   - `omnia-windows.exe`
+   - `omnia-linux.AppImage`
+
+   Then it commits the refreshed `public/updates/latest.json`.
+
+7. Verify downloads:
+
+   ```bash
+   curl -I https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk
+   curl -I https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe
+   curl -I https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage
+   ```
+
+8. Verify the feed:
 
    ```bash
    curl https://raw.githubusercontent.com/OPBSUTHAR/omnia/main/public/updates/latest.json
    ```
 
-8. Open an installed copy of the previous version. Within about four minutes (or
-   immediately via **Settings → Check for updates**) the update dialog should appear
-   with the new notes and a download button.
+9. Wait for the Vercel deployment and the `Deploy docs` run triggered by the feed commit.
 
-## What the Android workflow does
+10. Open an installed copy of the previous version. Within about four minutes (or
+    immediately via **Settings → Check for updates**) the update dialog appears with the
+    new notes and the installer for that platform.
 
-`.github/workflows/android-release.yml` runs on `push` of tags matching `v*`:
+## What the release workflow does
+
+`.github/workflows/release.yml` runs on `push` of tags matching `v*`:
+
+| Job | Runner | Output |
+| --- | --- | --- |
+| `android` | Ubuntu | signed `omnia.apk` artifact |
+| `desktop` (Windows) | `windows-latest` | `omnia-windows.exe` artifact |
+| `desktop` (Linux) | `ubuntu-latest` | `omnia-linux.AppImage` artifact |
+| `publish` | Ubuntu | GitHub Release + feed commit |
+
+The Android job:
 
 1. checks out the tag with full history,
 2. installs Node 22 dependencies with `npm ci`,
@@ -99,16 +129,20 @@ The first push to `main` deploys `https://opbsuthar.github.io/omnia/`.
 4. runs `npx expo prebuild --platform android --no-install`,
 5. runs `node scripts/android-signing.mjs` to point the release build type at that
    keystore and the password environment variables,
-6. runs `./gradlew assembleRelease` and copies the APK to `omnia.apk`,
-7. creates the GitHub Release using the notes from `release-notes/v<tag>.json`,
-8. runs `node scripts/write-feed.mjs <tag>` and commits the feed to `main`.
+6. runs `./gradlew assembleRelease` and copies the APK to `omnia.apk`.
 
-Because the feed commit lands only after the APK exists, users never see an update
+The desktop jobs export the web app, run `scripts/prepare-desktop.mjs`, install the
+Electron dependencies and build with electron-builder. The publish job downloads all
+three artifacts and attaches them to one release.
+
+Because the feed commit lands only after all installers exist, users never see an update
 prompt that points at a missing download.
 
 ## Manual fallback
 
-If Actions is unavailable, build locally with the Android SDK and Java 17:
+If Actions is unavailable, build the pieces locally.
+
+Android (requires Android SDK + Java 17):
 
 ```bash
 npx expo prebuild --platform android
@@ -117,16 +151,32 @@ node scripts/android-signing.mjs
 cd android && ./gradlew assembleRelease
 ```
 
-Upload `android/app/build/outputs/apk/release/app-release.apk` to a GitHub Release named
-`vX.Y.Z`, then run `node scripts/write-feed.mjs X.Y.Z` and commit the feed.
+Windows:
+
+```bash
+npm run build:desktop:win
+# desktop/release/omnia-windows.exe
+```
+
+Linux (run on Linux):
+
+```bash
+npm run build:desktop:linux
+# desktop/release/omnia-linux.AppImage
+```
+
+Upload those files to a GitHub Release named `vX.Y.Z`, then run
+`node scripts/write-feed.mjs X.Y.Z` and commit `public/updates/latest.json`.
 
 ## Rollback
 
 - **Bad feed value:** edit `public/updates/latest.json` back to the previous version and
   push. Apps that already updated stay updated; apps that have not will stop prompting.
-- **Bad APK:** delete the release asset or mark the release as a draft, then publish a
-  fixed patch version. Never reuse a version number or versionCode.
-- **Bad web deploy:** re-run the `deploy-web` workflow from the last good commit.
+- **Bad binary:** delete the release asset or mark the release as a draft, then publish a
+  fixed patch version. Never reuse a version number or Android versionCode.
+- **Bad web deploy:** promote the previous deployment in Vercel, or revert the commit and
+  let Vercel rebuild.
+- **Bad docs deploy:** re-run the `Deploy docs` workflow from the last good commit.
 
 ## Version rules
 
@@ -136,3 +186,5 @@ Upload `android/app/build/outputs/apk/release/app-release.apk` to a GitHub Relea
 - Tags always match `v<version>` and the value in `app.json`.
 - Pre-release suffixes (`1.2.0-beta.1`) are allowed for testing but the feed should
   normally point at a stable build.
+- The feed version is the installed app's source of truth. Desktop builds read the raw
+  GitHub feed, not the copy bundled inside the installer.

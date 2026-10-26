@@ -9,7 +9,10 @@
     "Light, dark and system themes with a phone-to-desktop responsive layout."
   ],
   "apkUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk",
-  "webUrl": "https://opbsuthar.github.io/omnia/",
-  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.0.0",
+  "windowsUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe",
+  "linuxUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage",
+  "webUrl": "https://omnia-opbsuthar.vercel.app/",
+  "docsUrl": "https://opbsuthar.github.io/omnia/",
+  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases",
   "mandatory": false
 }

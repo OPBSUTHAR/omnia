@@ -1,6 +1,6 @@
-import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
+import { isElectron } from '@/lib/device';
 import { UPDATE_FEED_URL } from '@/lib/links';
 
 export function compareVersions(a: string, b: string): number {
@@ -26,14 +26,14 @@ export function isValidVersion(value: unknown): value is string {
   return typeof value === 'string' && /^\d+(\.\d+){0,2}([-+].*)?$/.test(value.trim());
 }
 
+/**
+ * The browser app reads its own deployed feed. The packaged desktop app and
+ * native builds read the raw feed from main, so they can discover releases
+ * published after the binary was built.
+ */
 export function getFeedUrl(): string {
-  if (Platform.OS === 'web' && typeof window !== 'undefined') {
-    if (__DEV__) {
-      return `${window.location.origin}/updates/latest.json`;
-    }
-    const config = Constants.expoConfig as { experiments?: { baseUrl?: string } } | null;
-    const base = config?.experiments?.baseUrl ?? '/omnia';
-    return `${window.location.origin}${base.replace(/\/$/, '')}/updates/latest.json`;
+  if (Platform.OS === 'web' && typeof window !== 'undefined' && !isElectron()) {
+    return `${window.location.origin}/updates/latest.json`;
   }
   return UPDATE_FEED_URL;
 }

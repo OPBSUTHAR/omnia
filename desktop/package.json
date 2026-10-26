@@ -1,0 +1,74 @@
+{
+  "name": "omnia-desktop",
+  "productName": "Omnia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Omnia desktop shell for Windows and Linux.",
+  "author": {
+    "name": "Omprakash Suthar",
+    "email": "178475619+OPBSUTHAR@users.noreply.github.com",
+    "url": "https://github.com/OPBSUTHAR"
+  },
+  "license": "MIT",
+  "main": "main.cjs",
+  "scripts": {
+    "postinstall": "node node_modules/electron/install.js",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "build:win": "electron-builder --win nsis",
+    "build:linux": "electron-builder --linux AppImage"
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.opbsuthar.omnia",
+    "productName": "Omnia",
+    "copyright": "Copyright © 2026 Omprakash Suthar (@OPBSUTHAR)",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.cjs",
+      "app/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "asar": true,
+    "compression": "maximum",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "omnia-windows.${ext}"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowElevation": true,
+      "deleteAppDataOnUninstall": false,
+      "shortcutName": "Omnia",
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "build/icon.png",
+      "category": "Utility",
+      "artifactName": "omnia-linux.${ext}",
+      "synopsis": "One app. Every device.",
+      "description": "A local-first workspace with a focus timer, unit converter, scratchpad and live in-app updates."
+    }
+  }
+}

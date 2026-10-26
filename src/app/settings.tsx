@@ -312,7 +312,7 @@ export default function SettingsScreen() {
                 onPress={() => void openExternal(RELEASES_URL)}
               />
               <Button
-                label="Download APK"
+                label="Update this device"
                 variant="subtle"
                 size="sm"
                 icon="download-outline"
@@ -382,11 +382,6 @@ export default function SettingsScreen() {
             </View>
           </Card>
         </View>
-
-        <AppText variant="small" color={theme.textFaint} align="center">
-          Omnia v{updates.currentVersion} · {isMobile ? 'phone' : 'desktop'} layout · Built with
-          Expo + React Native
-        </AppText>
       </View>
     </Screen>
   );

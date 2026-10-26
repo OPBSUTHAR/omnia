@@ -1,6 +1,25 @@
 import * as Device from 'expo-device';
 import { Platform } from 'react-native';
 
+export type DesktopPlatform = 'windows' | 'linux';
+
+/** True inside the packaged Electron desktop app (Windows or Linux). */
+export function isElectron(): boolean {
+  return (
+    Platform.OS === 'web' &&
+    typeof navigator !== 'undefined' &&
+    /Electron/i.test(navigator.userAgent)
+  );
+}
+
+export function getDesktopPlatform(): DesktopPlatform | null {
+  if (!isElectron()) return null;
+  if (typeof navigator === 'undefined') return 'windows';
+  return /Linux/i.test(navigator.userAgent) && !/Android/i.test(navigator.userAgent)
+    ? 'linux'
+    : 'windows';
+}
+
 export function getPlatformName(): string {
   if (Platform.OS === 'android') {
     return Device.osVersion ? `Android ${Device.osVersion}` : 'Android';
@@ -8,10 +27,14 @@ export function getPlatformName(): string {
   if (Platform.OS === 'ios') {
     return Device.osVersion ? `iOS ${Device.osVersion}` : 'iOS';
   }
+  if (isElectron()) {
+    return getDesktopPlatform() === 'linux' ? 'Omnia for Linux' : 'Omnia for Windows';
+  }
   return getBrowserName();
 }
 
 export function getBrowserName(): string {
+  if (isElectron()) return 'Omnia desktop';
   if (typeof navigator === 'undefined') return 'Web';
   const ua = navigator.userAgent;
   if (/Edg\//.test(ua)) return 'Edge';

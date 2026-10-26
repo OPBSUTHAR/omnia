@@ -10,29 +10,18 @@ import { Card } from '@/components/ui/card';
 import { Badge, IconTile } from '@/components/ui/controls';
 import { Screen } from '@/components/ui/screen';
 import { SectionHeader } from '@/components/ui/section-header';
-import { useToast } from '@/components/ui/toast';
 import { useSession } from '@/features/session/session-provider';
 import { useTheme } from '@/features/theme/theme-provider';
-import { cardShadow, fonts, radius, space } from '@/features/theme/tokens';
+import { fonts, radius } from '@/features/theme/tokens';
 import { useUpdates } from '@/features/updates/updates-provider';
 import {
   formatViewport,
-  getBrowserName,
   getDeviceName,
   getGreeting,
   getPlatformName,
   timeAgo,
 } from '@/lib/device';
-import {
-  ISSUES_URL,
-  LATEST_APK_URL,
-  RELEASES_URL,
-  REPO_URL,
-  WEB_URL,
-} from '@/lib/links';
 import { useMounted } from '@/lib/use-mounted';
-import { openExternal } from '@/lib/open-external';
-import { usePwaInstall } from '@/lib/use-pwa-install';
 import { useResponsive } from '@/lib/use-responsive';
 
 const tools = [
@@ -65,10 +54,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const { session } = useSession();
   const updates = useUpdates();
-  const { showToast } = useToast();
   const mounted = useMounted();
-  const pwa = usePwaInstall();
-  const [openingDownload, setOpeningDownload] = useState(false);
 
   const firstName = session?.name.split(' ')[0] ?? 'there';
   const greeting = mounted ? getGreeting() : 'Welcome';
@@ -83,42 +69,6 @@ export default function HomeScreen() {
       return;
     }
     void updates.checkForUpdates(true);
-  };
-
-  const downloadAndroid = async () => {
-    if (openingDownload) return;
-    setOpeningDownload(true);
-    try {
-      await openExternal(updates.feed?.apkUrl ?? LATEST_APK_URL);
-      showToast('Download started. Open the APK to install over Omnia.', { kind: 'success' });
-    } catch {
-      showToast('Could not open the APK link. Try the releases page.', { kind: 'error' });
-    } finally {
-      setOpeningDownload(false);
-    }
-  };
-
-  const installWindows = async () => {
-    if (pwa.installed) {
-      showToast('Omnia is already installed on this device.', { kind: 'info' });
-      return;
-    }
-    if (pwa.canInstall) {
-      const accepted = await pwa.install();
-      showToast(accepted ? 'Installing Omnia for Windows…' : 'Install dismissed.', {
-        kind: accepted ? 'success' : 'info',
-      });
-      return;
-    }
-    if (Platform.OS === 'web') {
-      showToast('Open your browser menu and choose “Install Omnia” to add it to your PC.', {
-        kind: 'info',
-        duration: 5000,
-      });
-    } else {
-      await openExternal(WEB_URL);
-      showToast('Open Omnia on your PC, then install it from Chrome or Edge.', { kind: 'info' });
-    }
   };
 
   return (
@@ -296,8 +246,8 @@ export default function HomeScreen() {
               ]}>
               <Ionicons name="git-branch-outline" size={13} color={theme.textFaint} />
               <AppText variant="small" color={theme.textFaint} style={styles.footnoteText}>
-                Release flow: bump the version → push a tag → GitHub Actions builds the APK →
-                this dialog appears in the app.
+                Release flow: bump the version → push a tag → GitHub Actions builds the APK,
+                Windows installer and Linux AppImage → this dialog appears in the app.
               </AppText>
             </View>
           </Card>
@@ -326,67 +276,6 @@ export default function HomeScreen() {
                 onPress={() => router.navigate('/tools')}
               />
             ))}
-          </View>
-        </View>
-
-        <View>
-          <SectionHeader
-            eyebrow="Everywhere"
-            title="Get Omnia on your screens"
-            subtitle="Install the Android build, launch the web app, or pin Omnia to your desktop as an app."
-          />
-          <View style={styles.downloadGrid}>
-            <DownloadCard
-              icon="logo-android"
-              tone="mint"
-              title="Android"
-              subtitle="Direct APK, signed and installable over the previous build."
-              meta="Android 8+ · ~60 MB"
-              actionLabel={openingDownload ? 'Opening…' : 'Download APK'}
-              onAction={() => void downloadAndroid()}
-              highlight={Platform.OS === 'android'}
-            />
-            <DownloadCard
-              icon="desktop-outline"
-              tone="accent"
-              title="Windows"
-              subtitle="Install Omnia as a desktop app straight from Chrome or Edge."
-              meta={pwa.installed ? 'Installed on this device' : 'Progressive web app'}
-              actionLabel={pwa.installed ? 'Installed' : pwa.canInstall ? 'Install app' : 'How to install'}
-              onAction={() => void installWindows()}
-              highlight={Platform.OS === 'web' && getBrowserName() === 'Edge'}
-            />
-            <DownloadCard
-              icon="globe-outline"
-              tone="coral"
-              title="Web"
-              subtitle="The full Omnia experience in any modern browser, at any size."
-              meta="Always the latest build"
-              actionLabel="Launch web app"
-              onAction={() => void openExternal(WEB_URL)}
-              highlight={Platform.OS === 'web'}
-            />
-            <DownloadCard
-              icon="phone-portrait-outline"
-              tone="amber"
-              title="iPhone & iPad"
-              subtitle="Use Safari’s Share menu to add Omnia to your Home Screen."
-              meta="Safari · Add to Home Screen"
-              actionLabel="Open in Safari"
-              onAction={() => void openExternal(WEB_URL)}
-            />
-          </View>
-        </View>
-
-        <View style={[styles.footer, { borderTopColor: theme.border }]}>
-          <AppText variant="small" color={theme.textFaint}>
-            Omnia v{updates.currentVersion} · Local-first · Built by Omprakash Suthar
-            (@OPBSUTHAR)
-          </AppText>
-          <View style={styles.footerLinks}>
-            <FooterLink label="GitHub" url={REPO_URL} />
-            <FooterLink label="Releases" url={RELEASES_URL} />
-            <FooterLink label="Report a bug" url={ISSUES_URL} />
           </View>
         </View>
       </View>
@@ -479,67 +368,6 @@ function ToolCard({
           <Ionicons name="arrow-forward" size={14} color={theme.textFaint} />
         </View>
       </Card>
-    </Pressable>
-  );
-}
-
-function DownloadCard({
-  icon,
-  tone,
-  title,
-  subtitle,
-  meta,
-  actionLabel,
-  onAction,
-  highlight = false,
-}: {
-  icon: keyof typeof Ionicons.glyphMap;
-  tone: 'accent' | 'coral' | 'mint' | 'amber';
-  title: string;
-  subtitle: string;
-  meta: string;
-  actionLabel: string;
-  onAction: () => void;
-  highlight?: boolean;
-}) {
-  const { theme } = useTheme();
-  return (
-    <Card
-      style={[
-        styles.downloadCard,
-        highlight ? { borderColor: theme.accent, borderWidth: 1 } : null,
-      ]}>
-      <View style={styles.downloadTop}>
-        <IconTile name={icon} tone={tone} size={40} iconSize={19} />
-        {highlight ? <Badge label="This device" tone="accent" dot /> : null}
-      </View>
-      <AppText variant="h3">{title}</AppText>
-      <AppText variant="small" color={theme.textMuted} style={styles.downloadSubtitle}>
-        {subtitle}
-      </AppText>
-      <View style={styles.downloadBottom}>
-        <AppText variant="caption" color={theme.textFaint} style={styles.downloadMeta}>
-          {meta}
-        </AppText>
-        <Button
-          label={actionLabel}
-          variant={highlight ? 'primary' : 'secondary'}
-          size="sm"
-          iconAfter="arrow-forward"
-          onPress={onAction}
-        />
-      </View>
-    </Card>
-  );
-}
-
-function FooterLink({ label, url }: { label: string; url: string }) {
-  const { theme } = useTheme();
-  return (
-    <Pressable onPress={() => void openExternal(url)} style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}>
-      <AppText variant="small" color={theme.textMuted}>
-        {label}
-      </AppText>
     </Pressable>
   );
 }
@@ -802,49 +630,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 6,
     gap: 8,
-  },
-  downloadGrid: {
-    flexDirection: 'row',
-    gap: 12,
-    flexWrap: 'wrap',
-  },
-  downloadCard: {
-    flexGrow: 1,
-    flexBasis: 240,
-    minWidth: 210,
-    gap: 8,
-    padding: 20,
-  },
-  downloadTop: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 2,
-  },
-  downloadSubtitle: {
-    flex: 1,
-    lineHeight: 19,
-  },
-  downloadBottom: {
-    gap: 10,
-    marginTop: 6,
-  },
-  downloadMeta: {
-    fontSize: 8.5,
-    letterSpacing: 0.9,
-  },
-  footer: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    paddingTop: 18,
-    gap: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-  },
-  footerLinks: {
-    flexDirection: 'row',
-    gap: 16,
   },
   web: {
     cursor: 'pointer',

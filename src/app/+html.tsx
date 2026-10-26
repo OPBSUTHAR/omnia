@@ -1,8 +1,6 @@
 import { ScrollViewStyleReset, useServerDocumentContext } from 'expo-router/html';
 import type { PropsWithChildren } from 'react';
 
-const BASE_PATH = '/omnia';
-
 export default function Root({ children }: PropsWithChildren) {
   const { headNodes, bodyNodes, htmlAttributes, bodyAttributes } = useServerDocumentContext();
 
@@ -30,8 +28,8 @@ export default function Root({ children }: PropsWithChildren) {
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
 
-        <link rel="manifest" href={`${BASE_PATH}/manifest.webmanifest`} />
-        <link rel="apple-touch-icon" href={`${BASE_PATH}/icons/icon-192.png`} />
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -65,9 +63,11 @@ const globalStyles = `
 `;
 
 const serviceWorkerBootstrap = `
-  if ('serviceWorker' in navigator && location.pathname.indexOf('${BASE_PATH}') === 0) {
+  if ('serviceWorker' in navigator && !/Electron/i.test(navigator.userAgent)) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('${BASE_PATH}/sw.js').catch(function () {});
+      navigator.serviceWorker
+        .register('/sw.js', { updateViaCache: 'none' })
+        .catch(function () {});
     });
   }
 `;

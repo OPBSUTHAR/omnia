@@ -35,7 +35,7 @@ jobs:
         run: npm run typecheck
 
       - name: Build web export
-        run: npm run build:web
+        run: npm run build:web:routes
 
-      - name: Expand static routes
-        run: node scripts/expand-web.mjs
+      - name: Verify desktop payload
+        run: node scripts/prepare-desktop.mjs

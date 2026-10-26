@@ -3,7 +3,10 @@ export type UpdateFeed = {
   releasedAt?: string;
   notes: string[];
   apkUrl?: string;
+  windowsUrl?: string;
+  linuxUrl?: string;
   webUrl?: string;
+  docsUrl?: string;
   releasesUrl?: string;
   mandatory?: boolean;
 };

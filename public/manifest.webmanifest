@@ -1,10 +1,10 @@
 {
-  "id": "/omnia/",
+  "id": "/",
   "name": "Omnia — One app. Every device.",
   "short_name": "Omnia",
   "description": "A local-first toolkit for every screen you own: focus timer, unit converter, scratchpad and live in-app update alerts.",
-  "start_url": "/omnia/",
-  "scope": "/omnia/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "any",
@@ -35,13 +35,13 @@
     {
       "name": "Open toolkit",
       "short_name": "Tools",
-      "url": "/omnia/tools",
+      "url": "/tools",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Settings",
       "short_name": "Settings",
-      "url": "/omnia/settings",
+      "url": "/settings",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
   ]

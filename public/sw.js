@@ -2,7 +2,7 @@
    It is deliberately network-first so a fresh deploy wins whenever the
    device is online. The update feed is never cached. */
 
-const CACHE = 'omnia-runtime-v1';
+const CACHE = 'omnia-runtime-v2';
 
 self.addEventListener('install', () => {
   self.skipWaiting();

@@ -41,3 +41,16 @@ example
 # generated native folders
 /ios
 /android
+
+# desktop shell build output
+/desktop/app/
+/desktop/build/
+/desktop/release/
+/desktop/node_modules/
+
+# release helpers
+release-body.md
+.vercel/
+
+.vercel
+.env*

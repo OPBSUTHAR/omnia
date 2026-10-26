@@ -1,0 +1,248 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to build and publish (for example v1.1.0)
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  android:
+    name: Build signed Android APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Resolve tag
+        id: meta
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.meta.outputs.tag }}
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore signing keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "ANDROID_KEYSTORE_BASE64 is not set. Add the Omnia keystore secret before releasing."
+            exit 1
+          fi
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/omnia-release.keystore"
+
+      - name: Generate native Android project
+        run: npx expo prebuild --platform android --no-install
+
+      - name: Configure release signing
+        env:
+          OMNIA_KEYSTORE_PATH: ${{ runner.temp }}/omnia-release.keystore
+          OMNIA_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          OMNIA_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          OMNIA_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: node scripts/android-signing.mjs
+
+      - name: Build release APK
+        env:
+          OMNIA_KEYSTORE_PATH: ${{ runner.temp }}/omnia-release.keystore
+          OMNIA_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          OMNIA_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          OMNIA_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: cd android && chmod +x gradlew && ./gradlew assembleRelease --no-daemon
+
+      - name: Collect APK
+        run: cp android/app/build/outputs/apk/release/app-release.apk omnia.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: omnia.apk
+          if-no-files-found: error
+          retention-days: 2
+
+  desktop:
+    name: Build ${{ matrix.label }} desktop app
+    needs: android
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            label: Windows
+            platform: win
+            artifact: desktop-windows
+            output: desktop/release/omnia-windows.exe
+          - os: ubuntu-latest
+            label: Linux
+            platform: linux
+            artifact: desktop-linux
+            output: desktop/release/omnia-linux.AppImage
+    steps:
+      - name: Resolve tag
+        id: meta
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.meta.outputs.tag }}
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install app dependencies
+        run: npm ci
+
+      - name: Build static web app
+        run: npm run build:web:routes
+
+      - name: Prepare desktop payload
+        run: node scripts/prepare-desktop.mjs
+
+      - name: Install desktop dependencies
+        run: npm ci --prefix desktop
+
+      - name: Build installer
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npm --prefix desktop run build:${{ matrix.platform }}
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.output }}
+          if-no-files-found: error
+          retention-days: 2
+
+  publish:
+    name: Publish release and update feed
+    needs: [android, desktop]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Resolve tag
+        id: meta
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.meta.outputs.tag }}
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: android-apk
+          path: artifacts
+
+      - name: Download Windows installer
+        uses: actions/download-artifact@v4
+        with:
+          name: desktop-windows
+          path: artifacts
+
+      - name: Download Linux AppImage
+        uses: actions/download-artifact@v4
+        with:
+          name: desktop-linux
+          path: artifacts
+
+      - name: List release assets
+        run: ls -lh artifacts
+
+      - name: Build release notes
+        run: node scripts/release-body.mjs "${{ steps.meta.outputs.tag }}"
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" artifacts/* --clobber
+            gh release edit "$TAG" --notes-file release-body.md
+          else
+            gh release create "$TAG" artifacts/* \
+              --title "Omnia $TAG" \
+              --notes-file release-body.md \
+              --latest
+          fi
+
+      - name: Publish update feed
+        env:
+          TAG: ${{ steps.meta.outputs.tag }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "Omprakash Suthar"
+          git config user.email "178475619+OPBSUTHAR@users.noreply.github.com"
+          git fetch origin main
+          git checkout -B feed-update origin/main
+          node scripts/write-feed.mjs "$TAG"
+          git add public/updates/latest.json
+          if git diff --cached --quiet; then
+            echo "Update feed already points at $TAG."
+          else
+            git commit -m "chore: publish update feed for $TAG"
+            git push origin feed-update:main
+          fi

@@ -35,13 +35,19 @@ if (!notes) {
   }
 }
 
+const repo = 'https://github.com/OPBSUTHAR/omnia';
+const versionedRelease = `${repo}/releases/tag/v${version}`;
+
 const feed = {
   version,
   releasedAt,
   notes: notes ?? ['Maintenance release with small fixes and polish.'],
-  apkUrl: 'https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk',
-  webUrl: 'https://opbsuthar.github.io/omnia/',
-  releasesUrl: `https://github.com/OPBSUTHAR/omnia/releases/tag/v${version}`,
+  apkUrl: `${repo}/releases/latest/download/omnia.apk`,
+  windowsUrl: `${repo}/releases/latest/download/omnia-windows.exe`,
+  linuxUrl: `${repo}/releases/latest/download/omnia-linux.AppImage`,
+  webUrl: 'https://omnia-opbsuthar.vercel.app/',
+  docsUrl: 'https://opbsuthar.github.io/omnia/',
+  releasesUrl: versionedRelease,
   mandatory: false,
 };
 

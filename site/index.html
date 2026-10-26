@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Omnia — Install guide</title>
+    <meta
+      name="description"
+      content="Download and install Omnia on Android, Windows, Linux or the web. Official install guide, release downloads and update notes."
+    />
+    <meta name="theme-color" content="#08080C" />
+    <link rel="icon" href="assets/icon.png" />
+    <link rel="apple-touch-icon" href="assets/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Remove the old Omnia PWA service worker and its cache before this
+      // domain became the documentation site. Without this, returning visitors
+      // would keep seeing a cached copy of the previous app.
+      (function () {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function (regs) {
+            regs.forEach(function (reg) {
+              reg.unregister();
+            });
+          });
+        }
+        if (window.caches) {
+          caches.keys().then(function (keys) {
+            keys.forEach(function (key) {
+              caches.delete(key);
+            });
+          });
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Omnia install guide">
+        <img src="assets/icon.png" alt="" width="34" height="34" />
+        <span>Omnia</span>
+      </a>
+      <nav>
+        <a href="#download">Download</a>
+        <a href="#install">Install</a>
+        <a href="#updates">Updates</a>
+        <a class="nav-cta" href="https://omnia-opbsuthar.vercel.app/">Open app</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="dot"></span> Official install guide</div>
+          <h1>One app.<br />Every device.</h1>
+          <p class="lede">
+            Omnia is a local-first workspace with a focus timer, unit converter, scratchpad and
+            live in-app updates. This page is the download and installation guide. The full app
+            runs on Vercel.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://omnia-opbsuthar.vercel.app/">
+              Open the web app <span aria-hidden="true">↗</span>
+            </a>
+            <a class="button ghost" href="#download">Get the installers</a>
+          </div>
+          <div class="meta-row">
+            <span class="pill" id="version-pill">Latest release</span>
+            <span>Android · Windows · Linux · Web</span>
+            <span>MIT licensed</span>
+          </div>
+        </div>
+        <div class="hero-shot">
+          <img
+            src="assets/desktop.png"
+            alt="Omnia running on a desktop browser with the sidebar, greeting and update card visible"
+          />
+        </div>
+      </section>
+
+      <section id="download" class="section">
+        <div class="section-head">
+          <div class="eyebrow">Downloads</div>
+          <h2>Pick the build for this device.</h2>
+          <p class="section-lede">
+            Every installer is attached to the latest GitHub Release. Android builds install over
+            the previous version, and desktop installers keep your local session.
+          </p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <div class="card-icon android" aria-hidden="true">A</div>
+            <h3>Android</h3>
+            <p>Signed APK for Android 8 and newer. Direct install, no store.</p>
+            <a
+              class="button primary small"
+              id="android-link"
+              href="https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk"
+              >Download APK</a
+            >
+            <span class="fine">~60 MB · signed with the Omnia release key</span>
+          </article>
+
+          <article class="download-card">
+            <div class="card-icon windows" aria-hidden="true">W</div>
+            <h3>Windows</h3>
+            <p>A real desktop installer. Adds Omnia to the Start menu and your desktop.</p>
+            <a
+              class="button primary small"
+              id="windows-link"
+              data-desktop
+              href="https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe"
+              >Download .exe</a
+            >
+            <span class="fine" id="windows-note">64-bit installer · unsigned build</span>
+          </article>
+
+          <article class="download-card">
+            <div class="card-icon linux" aria-hidden="true">L</div>
+            <h3>Linux</h3>
+            <p>A portable AppImage. Download, make it executable, and run.</p>
+            <a
+              class="button primary small"
+              id="linux-link"
+              data-desktop
+              href="https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage"
+              >Download AppImage</a
+            >
+            <span class="fine" id="linux-note">x86_64 AppImage · unsigned build</span>
+          </article>
+
+          <article class="download-card">
+            <div class="card-icon web" aria-hidden="true">◎</div>
+            <h3>Web &amp; iPhone</h3>
+            <p>Run the full app in any modern browser. On iPhone, add it to your Home Screen.</p>
+            <a class="button ghost small" href="https://omnia-opbsuthar.vercel.app/"
+              >Launch web app</a
+            >
+            <span class="fine">Always the newest deployed build</span>
+          </article>
+        </div>
+        <p class="callout">
+          Windows and Linux builds are not code-signed yet. Windows SmartScreen may ask you to
+          choose <strong>More info → Run anyway</strong>. On Linux, run
+          <code>chmod +x omnia-linux.AppImage</code> once before launching.
+        </p>
+      </section>
+
+      <section id="install" class="section">
+        <div class="section-head">
+          <div class="eyebrow">Step by step</div>
+          <h2>Installing Omnia.</h2>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card">
+            <span class="step-number">01</span>
+            <h3>Android</h3>
+            <ol>
+              <li>Download <code>omnia.apk</code>.</li>
+              <li>
+                When Android asks, allow installs from your browser. This is a one-time permission.
+              </li>
+              <li>Open the downloaded file and tap <strong>Install</strong>.</li>
+              <li>
+                Later updates install over the app and keep your session, notes and settings.
+              </li>
+            </ol>
+          </article>
+          <article class="step-card">
+            <span class="step-number">02</span>
+            <h3>Windows</h3>
+            <ol>
+              <li>Download <code>omnia-windows.exe</code>.</li>
+              <li>
+                SmartScreen may appear because the build is unsigned. Choose
+                <strong>More info → Run anyway</strong>.
+              </li>
+              <li>The installer creates Start menu and desktop shortcuts.</li>
+              <li>Launch Omnia from the Start menu or desktop.</li>
+            </ol>
+          </article>
+          <article class="step-card">
+            <span class="step-number">03</span>
+            <h3>Linux</h3>
+            <ol>
+              <li>Download <code>omnia-linux.AppImage</code>.</li>
+              <li>Open a terminal in your Downloads folder.</li>
+              <li><code>chmod +x omnia-linux.AppImage</code></li>
+              <li>Double-click the file, or run <code>./omnia-linux.AppImage</code>.</li>
+            </ol>
+          </article>
+          <article class="step-card">
+            <span class="step-number">04</span>
+            <h3>Web &amp; iPhone</h3>
+            <ol>
+              <li>Open the web app in Chrome, Edge, Firefox or Safari.</li>
+              <li>On iPhone or iPad, tap the Share button in Safari.</li>
+              <li>Choose <strong>Add to Home Screen</strong>.</li>
+              <li>Omnia opens full-screen with its own icon.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div class="phone-shot">
+          <img src="assets/phone.png" alt="Omnia on a phone showing the greeting and update card" />
+        </div>
+        <div class="split-copy">
+          <div class="eyebrow">What's inside</div>
+          <h2>A real app, not a shortcut.</h2>
+          <p>
+            The same Expo + React Native codebase renders the phone app, the desktop app and the
+            website. Layouts reflow from a 320 px phone to an ultrawide monitor.
+          </p>
+          <ul class="feature-list">
+            <li>
+              <strong>Local-first sessions.</strong> A name, an emoji badge and a device ID stored
+              only on your device. No account, no server, no tracking.
+            </li>
+            <li>
+              <strong>Three working tools.</strong> A focus timer, a converter and an autosaving
+              scratchpad.
+            </li>
+            <li>
+              <strong>Live in-app updates.</strong> The app checks its release feed on launch, on
+              foreground and every four minutes. A new build opens a real update dialog inside the
+              app.
+            </li>
+            <li>
+              <strong>Light, dark and system themes.</strong> Applied instantly across every screen.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="updates" class="section">
+        <div class="section-head">
+          <div class="eyebrow">Updates</div>
+          <h2>New builds arrive inside the app.</h2>
+          <p class="section-lede">
+            When a release is published, Omnia compares the feed version with the installed build
+            and shows the release notes. Android downloads the next APK; Windows and Linux download
+            the next installer; the web app reloads the newest deployment.
+          </p>
+        </div>
+        <div class="update-panel">
+          <div class="update-header">
+            <span class="update-icon" aria-hidden="true">↻</span>
+            <div>
+              <h3>Release feed</h3>
+              <p id="feed-status">Checking the latest published version…</p>
+            </div>
+            <span class="pill" id="feed-version">—</span>
+          </div>
+          <ul id="release-notes" class="release-notes">
+            <li>Release notes load from the public update feed.</li>
+          </ul>
+          <div class="update-actions">
+            <a class="button ghost small" href="https://github.com/OPBSUTHAR/omnia/releases"
+              >All releases</a
+            >
+            <a
+              class="button ghost small"
+              href="https://raw.githubusercontent.com/OPBSUTHAR/omnia/main/public/updates/latest.json"
+              >View feed JSON</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="section note-section">
+        <div class="note-card">
+          <h2>Why are the app and this guide on different hosts?</h2>
+          <p>
+            The actual app is a full React application deployed on Vercel at
+            <a href="https://omnia-opbsuthar.vercel.app/">omnia-opbsuthar.vercel.app</a>. This
+            GitHub Pages site is deliberately static: it stays available even if the app host is
+            down, and it is the canonical place for install steps and download links.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img src="assets/icon.png" alt="" width="28" height="28" />
+        <span>Omnia</span>
+      </div>
+      <p>One app. Every device.</p>
+      <div class="footer-links">
+        <a href="https://github.com/OPBSUTHAR/omnia">GitHub</a>
+        <a href="https://github.com/OPBSUTHAR/omnia/releases">Releases</a>
+        <a href="https://github.com/OPBSUTHAR/omnia/issues">Report a bug</a>
+        <a href="https://omnia-opbsuthar.vercel.app/">Web app</a>
+      </div>
+      <p class="credit">
+        Built by
+        <a href="https://github.com/OPBSUTHAR">Omprakash Suthar (@OPBSUTHAR)</a>. MIT licensed.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
