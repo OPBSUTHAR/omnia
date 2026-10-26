@@ -10,6 +10,6 @@
   ],
   "apkUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk",
   "webUrl": "https://opbsuthar.github.io/omnia/",
-  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases",
+  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.0.0",
   "mandatory": false
 }
