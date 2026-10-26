@@ -74,6 +74,11 @@ jobs:
         run: node scripts/android-signing.mjs
 
       - name: Build release APK
+        env:
+          OMNIA_KEYSTORE_PATH: ${{ runner.temp }}/omnia-release.keystore
+          OMNIA_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          OMNIA_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          OMNIA_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: cd android && chmod +x gradlew && ./gradlew assembleRelease --no-daemon
 
       - name: Collect APK
