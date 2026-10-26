@@ -166,7 +166,8 @@ const styles = StyleSheet.create({
     padding: 22,
     gap: 16,
     overflow: 'hidden',
-    flex: 1,
+    flexGrow: 1,
+    width: '100%',
   },
   art: {
     ...StyleSheet.absoluteFill,

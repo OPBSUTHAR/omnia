@@ -10,11 +10,13 @@ import { fonts, radius, space } from '@/features/theme/tokens';
 import { FocusTimer } from '@/features/tools/focus-timer';
 import { Scratchpad } from '@/features/tools/scratchpad';
 import { UnitConverter } from '@/features/tools/unit-converter';
+import { useResponsive } from '@/lib/use-responsive';
 
 const roadmap = ['Cloud session sync', 'Quick capture', 'File drop', 'AI assistant'];
 
 export default function ToolsScreen() {
   const { theme } = useTheme();
+  const { isMobile } = useResponsive();
 
   return (
     <Screen>
@@ -30,11 +32,11 @@ export default function ToolsScreen() {
           </AppText>
         </View>
 
-        <View style={styles.grid}>
-          <View style={styles.timerWrap}>
+        <View style={[styles.grid, isMobile ? styles.gridMobile : null]}>
+          <View style={[styles.timerWrap, isMobile ? styles.wrapMobile : null]}>
             <FocusTimer />
           </View>
-          <View style={styles.converterWrap}>
+          <View style={[styles.converterWrap, isMobile ? styles.wrapMobile : null]}>
             <UnitConverter />
           </View>
         </View>
@@ -86,6 +88,17 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 12,
     alignItems: 'stretch',
+  },
+  gridMobile: {
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+  },
+  wrapMobile: {
+    flexBasis: 'auto',
+    flexGrow: 0,
+    flexShrink: 1,
+    minWidth: 0,
+    width: '100%',
   },
   timerWrap: {
     flexGrow: 1,

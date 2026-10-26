@@ -299,6 +299,9 @@ function StatTile({
   const { theme } = useTheme();
   return (
     <Card padded={false} style={[styles.statCard, compact ? styles.statCardCompact : null]}>
+      {compact && tone ? (
+        <View style={[styles.statDotCompact, { backgroundColor: tone }]} />
+      ) : null}
       <View style={[styles.statInner, compact ? styles.statInnerCompact : null]}>
         <AppText
           variant="caption"
@@ -307,19 +310,26 @@ function StatTile({
           {label}
         </AppText>
         <View style={[styles.statBody, compact ? styles.statBodyCompact : null]}>
-          <AppText variant="h3" numberOfLines={1} style={styles.statValue}>
+          <AppText
+            variant="h3"
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.75}
+            style={[styles.statValue, compact ? styles.statValueCompact : null]}>
             {value}
           </AppText>
-          <View style={styles.statSubRow}>
-            {tone ? <View style={[styles.statDot, { backgroundColor: tone }]} /> : null}
-            <AppText
-              variant="small"
-              color={theme.textMuted}
-              numberOfLines={1}
-              style={styles.statSub}>
-              {sub}
-            </AppText>
-          </View>
+          {compact ? null : (
+            <View style={styles.statSubRow}>
+              {tone ? <View style={[styles.statDot, { backgroundColor: tone }]} /> : null}
+              <AppText
+                variant="small"
+                color={theme.textMuted}
+                numberOfLines={1}
+                style={styles.statSub}>
+                {sub}
+              </AppText>
+            </View>
+          )}
         </View>
       </View>
     </Card>
@@ -492,46 +502,60 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   statsRowMobile: {
-    flexDirection: 'column',
-    gap: 8,
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    gap: 6,
   },
   statCard: {
     flex: 1,
     minWidth: 100,
   },
   statCardCompact: {
-    flex: 0,
-    flexBasis: 'auto',
+    flex: 1,
     minWidth: 0,
+    position: 'relative',
+  },
+  statDotCompact: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    width: 5,
+    height: 5,
+    borderRadius: 3,
   },
   statInner: {
     padding: 14,
     gap: 4,
   },
   statInnerCompact: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 12,
-    paddingVertical: 12,
+    gap: 3,
+    paddingHorizontal: 10,
+    paddingVertical: 11,
   },
   statLabel: {
     fontSize: 8.5,
     letterSpacing: 1.2,
   },
   statLabelCompact: {
-    width: 64,
-    fontSize: 9,
-    paddingTop: 4,
+    width: 'auto',
+    fontSize: 8,
+    letterSpacing: 0.9,
+    paddingTop: 0,
   },
   statBody: {
     gap: 3,
   },
   statBodyCompact: {
-    flex: 1,
+    flexGrow: 0,
+    width: '100%',
   },
   statValue: {
     fontSize: 14.5,
     lineHeight: 19,
+  },
+  statValueCompact: {
+    fontSize: 12,
+    lineHeight: 16,
   },
   statSubRow: {
     flexDirection: 'row',
@@ -610,11 +634,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexBasis: 240,
     minWidth: 220,
+    alignSelf: 'stretch',
   },
   toolCardInner: {
     padding: 20,
     gap: 10,
-    height: '100%',
+    flexGrow: 1,
   },
   toolTitle: {
     marginTop: 2,

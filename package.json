@@ -21,7 +21,7 @@
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
     "lint": "expo lint",
-    "build:web": "expo export --platform web",
+    "build:web": "expo export --platform web --clear",
     "build:web:routes": "npm run build:web && node scripts/expand-web.mjs",
     "prepare:desktop": "node scripts/prepare-desktop.mjs",
     "build:desktop:win": "npm run build:web:routes && node scripts/prepare-desktop.mjs && npm --prefix desktop install --no-audit --no-fund && npm --prefix desktop run build:win",

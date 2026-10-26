@@ -247,7 +247,8 @@ function UnitPicker({
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
+    flexGrow: 1,
+    width: '100%',
     gap: 16,
     padding: 22,
   },
