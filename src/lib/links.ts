@@ -1,0 +1,10 @@
+export const GITHUB_OWNER = 'OPBSUTHAR';
+export const REPO_NAME = 'omnia';
+export const REPO_URL = `https://github.com/${GITHUB_OWNER}/${REPO_NAME}`;
+export const RELEASES_URL = `${REPO_URL}/releases`;
+export const RELEASES_LATEST_URL = `${REPO_URL}/releases/latest`;
+export const ISSUES_URL = `${REPO_URL}/issues`;
+export const WEB_URL = `https://${GITHUB_OWNER.toLowerCase()}.github.io/${REPO_NAME}/`;
+export const LATEST_APK_URL = `${REPO_URL}/releases/latest/download/omnia.apk`;
+export const UPDATE_FEED_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${REPO_NAME}/main/public/updates/latest.json`;
+export const APP_STORE_URL = RELEASES_URL;

@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "Omnia",
+    "slug": "omnia",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/images/icon.png",
+    "scheme": "omnia",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#08080C",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.opbsuthar.omnia",
+      "buildNumber": "1"
+    },
+    "android": {
+      "package": "com.opbsuthar.omnia",
+      "versionCode": 1,
+      "predictiveBackGestureEnabled": true,
+      "adaptiveIcon": {
+        "backgroundColor": "#0B0A12",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png",
+      "name": "Omnia — One app. Every device.",
+      "shortName": "Omnia",
+      "themeColor": "#6D4AFF",
+      "backgroundColor": "#08080C"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#08080C",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 160
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true,
+      "baseUrl": "/omnia"
+    }
+  }
+}

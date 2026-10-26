@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "releasedAt": "2026-10-26",
+  "notes": [
+    "First public build — Omnia now lives on Android, the web and your desktop.",
+    "Local-first sessions with a name, a badge and a device identity.",
+    "Three working tools: a focus timer, a unit converter and an autosaving scratchpad.",
+    "Live update alerts: when a new build ships, Omnia tells you inside the app.",
+    "Light, dark and system themes with a phone-to-desktop responsive layout."
+  ],
+  "apkUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk",
+  "webUrl": "https://opbsuthar.github.io/omnia/",
+  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases",
+  "mandatory": false
+}
