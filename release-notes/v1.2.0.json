@@ -1,0 +1,10 @@
+{
+  "version": "1.2.0",
+  "releasedAt": "2026-10-26",
+  "notes": [
+    "Phone home stats now fit on one compact row instead of stacking into three sparse bars.",
+    "Fixed the blank space after the focus timer on Android: the converter and scratchpad now render at their full height.",
+    "Toolkit cards and tool panels no longer collapse on narrow phone screens.",
+    "Cleared the Expo export cache so update checks always compare the real installed version."
+  ]
+}
