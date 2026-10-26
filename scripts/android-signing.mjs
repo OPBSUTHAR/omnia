@@ -31,7 +31,8 @@ if (source.includes('omniaRelease')) {
   process.exit(0);
 }
 
-const keyPasswordEnv = 'System.getenv(\'OMNIA_KEY_PASSWORD\') ?? System.getenv(\'OMNIA_KEYSTORE_PASSWORD\')';
+const keyPasswordEnv =
+  "System.getenv('OMNIA_KEY_PASSWORD') ?: System.getenv('OMNIA_KEYSTORE_PASSWORD')";
 
 const signingBlock = [
   'signingConfigs {',
