@@ -1,17 +1,17 @@
 {
-  "version": "1.2.0",
+  "version": "1.2.1",
   "releasedAt": "2026-10-26",
   "notes": [
-    "Phone home stats now fit on one compact row instead of stacking into three sparse bars.",
-    "Fixed the blank space after the focus timer on Android: the converter and scratchpad now render at their full height.",
-    "Toolkit cards and tool panels no longer collapse on narrow phone screens.",
-    "Cleared the Expo export cache so update checks always compare the real installed version."
+    "Android updates now download inside Omnia with a live progress bar instead of opening a browser.",
+    "When the APK is ready, Omnia opens Android's installer automatically; allow installs from Omnia the first time.",
+    "Fixes the browser download that stopped at 100 percent and never returned to the app.",
+    "Your session, scratchpad and settings are preserved."
   ],
   "apkUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk",
   "windowsUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe",
   "linuxUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage",
   "webUrl": "https://omnia-suthara.vercel.app/",
   "docsUrl": "https://opbsuthar.github.io/omnia/",
-  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.2.0",
+  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.2.1",
   "mandatory": false
 }
