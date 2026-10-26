@@ -95,7 +95,6 @@ jobs:
 
   desktop:
     name: Build ${{ matrix.label }} desktop app
-    needs: android
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     strategy:
