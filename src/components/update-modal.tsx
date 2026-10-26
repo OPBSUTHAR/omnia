@@ -3,7 +3,7 @@ import * as Linking from 'expo-linking';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/ui/app-text';
-import { Badge, IconTile } from '@/components/ui/controls';
+import { Badge, IconTile, ProgressBar } from '@/components/ui/controls';
 import { Button } from '@/components/ui/button';
 import { ModalSheet, SheetGrabber } from '@/components/ui/modal-sheet';
 import { useTheme } from '@/features/theme/theme-provider';
@@ -22,13 +22,19 @@ export function UpdateModal() {
     currentVersion,
     dismissUpdate,
     installUpdate,
+    isInstalling,
+    installProgress,
   } = useUpdates();
 
   if (!feed) return null;
   const mandatory = feed.mandatory === true;
+  const percent = installProgress === null ? 0 : Math.round(installProgress * 100);
 
   return (
-    <ModalSheet visible={modalVisible} onClose={dismissUpdate} closeOnBackdrop={!mandatory}>
+    <ModalSheet
+      visible={modalVisible}
+      onClose={isInstalling ? () => undefined : dismissUpdate}
+      closeOnBackdrop={!mandatory && !isInstalling}>
       {isMobile ? <SheetGrabber /> : null}
       <View style={styles.headerRow}>
         <IconTile name="sparkles" tone="accent" size={44} iconSize={20} />
@@ -46,11 +52,15 @@ export function UpdateModal() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel="Close update dialog"
+            disabled={isInstalling}
             onPress={dismissUpdate}
             hitSlop={10}
             style={({ pressed }) => [
               styles.closeButton,
-              { backgroundColor: theme.surfaceAlt, opacity: pressed ? 0.7 : 1 },
+              {
+                backgroundColor: theme.surfaceAlt,
+                opacity: isInstalling ? 0.35 : pressed ? 0.7 : 1,
+              },
             ]}>
             <Ionicons name="close" size={18} color={theme.textMuted} />
           </Pressable>
@@ -93,9 +103,27 @@ export function UpdateModal() {
         <AppText variant="small" color={theme.textMuted} style={styles.calloutText}>
           {mandatory
             ? 'This build is required to keep using Omnia. Install it to continue.'
-            : 'Installing over your current version keeps your session, notes and settings intact.'}
+            : 'Omnia downloads the APK inside the app, then opens the Android installer. Your session, notes and settings stay intact.'}
         </AppText>
       </View>
+
+      {isInstalling ? (
+        <View style={[styles.progressBlock, { backgroundColor: theme.surfaceAlt, borderColor: theme.border }]}>
+          <View style={styles.progressHeader}>
+            <AppText variant="small" style={styles.progressLabel}>
+              {percent >= 100 ? 'Opening the Android installer…' : 'Downloading the update…'}
+            </AppText>
+            <AppText variant="caption" color={theme.accent}>
+              {percent}%
+            </AppText>
+          </View>
+          <ProgressBar progress={installProgress ?? 0} height={6} />
+          <AppText variant="small" color={theme.textMuted} style={styles.progressHint}>
+            Keep Omnia open. The system installer will open automatically; if Android asks,
+            allow installs from Omnia.
+          </AppText>
+        </View>
+      ) : null}
 
       <View style={styles.actions}>
         {!mandatory ? (
@@ -103,14 +131,23 @@ export function UpdateModal() {
             label="Later"
             variant="ghost"
             fullWidth
+            disabled={isInstalling}
             style={styles.actionButton}
             onPress={dismissUpdate}
           />
         ) : null}
         <Button
-          label="Update now"
+          label={
+            isInstalling
+              ? percent >= 100
+                ? 'Opening installer…'
+                : `Downloading ${percent}%`
+              : 'Update now'
+          }
           icon="download-outline"
           fullWidth
+          loading={isInstalling}
+          disabled={isInstalling}
           style={styles.actionButton}
           onPress={() => void installUpdate()}
         />
@@ -195,6 +232,29 @@ const styles = StyleSheet.create({
   calloutText: {
     flex: 1,
     fontFamily: fonts.regular,
+  },
+  progressBlock: {
+    gap: 9,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: radius.md,
+    padding: 13,
+    marginBottom: space.lg,
+  },
+  progressHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 10,
+  },
+  progressLabel: {
+    flex: 1,
+    fontFamily: fonts.semibold,
+    fontSize: 12.5,
+  },
+  progressHint: {
+    fontFamily: fonts.regular,
+    fontSize: 11.5,
+    lineHeight: 16,
   },
   actions: {
     flexDirection: 'row',

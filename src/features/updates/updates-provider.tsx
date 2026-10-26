@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
+import * as FileSystem from 'expo-file-system/legacy';
+import * as IntentLauncher from 'expo-intent-launcher';
 import * as Linking from 'expo-linking';
 import {
   createContext,
@@ -37,6 +39,8 @@ type UpdatesContextValue = {
   status: UpdateCheckStatus;
   hasUpdate: boolean;
   isChecking: boolean;
+  isInstalling: boolean;
+  installProgress: number | null;
   lastChecked: string | null;
   error: string | null;
   modalVisible: boolean;
@@ -80,6 +84,8 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
   const [error, setError] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [isInstalling, setIsInstalling] = useState(false);
+  const [installProgress, setInstallProgress] = useState<number | null>(null);
   const dismissedRef = useRef<string | null>(null);
   const busyRef = useRef(false);
 
@@ -211,7 +217,7 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
   }, [hasUpdate]);
 
   const installUpdate = useCallback(async () => {
-    if (!feed) return;
+    if (!feed || isInstalling) return;
 
     // In a browser/PWA the newest build is already deployed, so a reload is
     // the update. Desktop and Android download a real installer.
@@ -231,6 +237,62 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
             ? feed.linuxUrl ?? LATEST_LINUX_URL
             : feed.webUrl ?? WEB_URL;
 
+    if (Platform.OS === 'android') {
+      setIsInstalling(true);
+      setInstallProgress(0);
+      try {
+        if (!FileSystem.cacheDirectory) {
+          throw new Error('This device has no writable cache directory.');
+        }
+        const destination = `${FileSystem.cacheDirectory}omnia-${feed.version}.apk`;
+        await FileSystem.deleteAsync(destination, { idempotent: true }).catch(() => undefined);
+        const download = FileSystem.createDownloadResumable(
+          target,
+          destination,
+          { headers: { Accept: 'application/vnd.android.package-archive' } },
+          (progress) => {
+            if (progress.totalBytesExpectedToWrite > 0) {
+              setInstallProgress(
+                Math.min(1, progress.totalBytesWritten / progress.totalBytesExpectedToWrite)
+              );
+            }
+          }
+        );
+        const result = await download.downloadAsync();
+        if (!result?.uri) throw new Error('The APK download did not complete.');
+        setInstallProgress(1);
+
+        const contentUri = await FileSystem.getContentUriAsync(result.uri);
+        setModalVisible(false);
+        await IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
+          data: contentUri,
+          type: 'application/vnd.android.package-archive',
+          flags: 1,
+        });
+        showToast('Download complete. Confirm the install in the system dialog.', {
+          kind: 'success',
+        });
+      } catch (caught) {
+        const message =
+          caught instanceof Error ? caught.message : 'The update could not be installed.';
+        if (/security|permission|unknown|not allowed/i.test(message)) {
+          const packageName =
+            Constants.expoConfig?.android?.package ?? 'com.opbsuthar.omnia';
+          await IntentLauncher.startActivityAsync(
+            'android.settings.MANAGE_UNKNOWN_APP_SOURCES',
+            { data: `package:${packageName}` }
+          ).catch(() => undefined);
+          showToast('Allow Omnia to install apps, then tap Update again.', { kind: 'error' });
+        } else {
+          showToast(`Update failed: ${message}`, { kind: 'error' });
+        }
+      } finally {
+        setIsInstalling(false);
+        setInstallProgress(null);
+      }
+      return;
+    }
+
     try {
       if (Platform.OS === 'web' && typeof window !== 'undefined') {
         window.open(target, '_blank', 'noopener,noreferrer');
@@ -238,18 +300,16 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
         await Linking.openURL(target);
       }
       showToast(
-        Platform.OS === 'android'
-          ? 'Download started — open the APK to install over Omnia.'
-          : desktop
-            ? 'Download started — run the installer to update Omnia.'
-            : 'Opening the latest build in a new tab.',
+        desktop
+          ? 'Download started — run the installer to update Omnia.'
+          : 'Opening the latest build in a new tab.',
         { kind: 'success' }
       );
       setModalVisible(false);
     } catch {
       showToast('Could not open the download link. Try the releases page.', { kind: 'error' });
     }
-  }, [feed, showToast]);
+  }, [feed, isInstalling, showToast]);
 
   const value = useMemo<UpdatesContextValue>(
     () => ({
@@ -258,6 +318,8 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
       status,
       hasUpdate,
       isChecking: status === 'checking',
+      isInstalling,
+      installProgress,
       lastChecked,
       error,
       modalVisible,
@@ -270,6 +332,8 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
       feed,
       status,
       hasUpdate,
+      isInstalling,
+      installProgress,
       lastChecked,
       error,
       modalVisible,

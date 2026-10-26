@@ -273,7 +273,7 @@ export default function SettingsScreen() {
                 <Button
                   label="Update"
                   size="sm"
-                  onPress={() => void updates.installUpdate()}
+                  onPress={updates.showUpdate}
                 />
               </View>
             ) : null}
@@ -312,11 +312,13 @@ export default function SettingsScreen() {
                 onPress={() => void openExternal(RELEASES_URL)}
               />
               <Button
-                label="Update this device"
+                label={updates.hasUpdate ? 'Update this device' : 'Check for updates'}
                 variant="subtle"
                 size="sm"
-                icon="download-outline"
-                onPress={() => void updates.installUpdate()}
+                icon={updates.hasUpdate ? 'download-outline' : 'refresh'}
+                onPress={() =>
+                  updates.hasUpdate ? updates.showUpdate() : void updates.checkForUpdates(true)
+                }
               />
             </View>
           </Card>

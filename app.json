@@ -17,6 +17,7 @@
     "android": {
       "package": "com.opbsuthar.omnia",
       "versionCode": 3,
+      "permissions": ["REQUEST_INSTALL_PACKAGES"],
       "predictiveBackGestureEnabled": true,
       "adaptiveIcon": {
         "backgroundColor": "#0B0A12",
