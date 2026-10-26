@@ -6,6 +6,15 @@ All notable changes to Omnia are documented here. The format follows
 
 <!-- releases -->
 
+## [1.1.0] - 2026-10-26
+
+- Real Windows and Linux desktop installers built with Electron
+- The full web app now runs on Vercel; GitHub Pages is the install guide
+- Downloads live in the global app footer with direct links
+- Update dialog selects the right installer for each platform
+- Fixes for the desktop sidebar and mobile settings layout
+
+
 ## [1.0.0] - 2026-10-26
 
 - First public build — Omnia now lives on Android, the web and your desktop.
