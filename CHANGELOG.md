@@ -6,6 +6,14 @@ All notable changes to Omnia are documented here. The format follows
 
 <!-- releases -->
 
+## [1.2.1] - 2026-10-26
+
+- Android updates now download inside Omnia with a live progress bar instead of opening a browser.
+- When the APK is ready, Omnia opens Android's installer automatically; allow installs from Omnia the first time.
+- Fixes the browser download that stopped at 100 percent and never returned to the app.
+- Your session, scratchpad and settings are preserved.
+
+
 ## [1.2.0] - 2026-10-26
 
 - Phone home stats now fit on one compact row instead of stacking into three sparse bars.

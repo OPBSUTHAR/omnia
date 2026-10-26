@@ -2,7 +2,7 @@
   "expo": {
     "name": "Omnia",
     "slug": "omnia",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "omnia",
@@ -12,12 +12,14 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.opbsuthar.omnia",
-      "buildNumber": "3"
+      "buildNumber": "4"
     },
     "android": {
       "package": "com.opbsuthar.omnia",
-      "versionCode": 3,
-      "permissions": ["REQUEST_INSTALL_PACKAGES"],
+      "versionCode": 4,
+      "permissions": [
+        "REQUEST_INSTALL_PACKAGES"
+      ],
       "predictiveBackGestureEnabled": true,
       "adaptiveIcon": {
         "backgroundColor": "#0B0A12",
