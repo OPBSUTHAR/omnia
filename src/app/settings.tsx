@@ -128,7 +128,7 @@ export default function SettingsScreen() {
         </View>
 
         <View style={styles.grid}>
-          <Card style={styles.profileCard}>
+          <Card style={[styles.profileCard, isMobile ? styles.cardMobile : null]}>
             <View style={styles.profileHeader}>
               <View style={[styles.avatar, { backgroundColor: theme.accentSoft }]}>
                 <AppText style={styles.avatarEmoji}>{session?.emoji ?? '🙂'}</AppText>
@@ -204,7 +204,7 @@ export default function SettingsScreen() {
             </View>
           </Card>
 
-          <Card style={styles.appearanceCard}>
+          <Card style={[styles.appearanceCard, isMobile ? styles.cardMobile : null]}>
             <View style={styles.cardHeader}>
               <IconTile name="color-palette-outline" tone="accent" size={40} iconSize={19} />
               <View style={styles.cardHeaderText}>
@@ -323,7 +323,7 @@ export default function SettingsScreen() {
         </View>
 
         <View style={styles.grid}>
-          <Card style={styles.aboutCard}>
+          <Card style={[styles.aboutCard, isMobile ? styles.cardMobile : null]}>
             <View style={styles.cardHeader}>
               <IconTile name="information-circle-outline" tone="coral" size={40} iconSize={19} />
               <View style={styles.cardHeaderText}>
@@ -353,7 +353,7 @@ export default function SettingsScreen() {
             </AppText>
           </Card>
 
-          <Card style={styles.dataCard}>
+          <Card style={[styles.dataCard, isMobile ? styles.cardMobile : null]}>
             <View style={styles.cardHeader}>
               <IconTile name="shield-checkmark-outline" tone="mint" size={40} iconSize={19} />
               <View style={styles.cardHeaderText}>
@@ -451,6 +451,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 12,
     alignItems: 'stretch',
+  },
+  cardMobile: {
+    flexBasis: 'auto',
+    flexGrow: 0,
+    width: '100%',
   },
   profileCard: {
     flexGrow: 1.15,

@@ -682,7 +682,7 @@ const styles = StyleSheet.create({
   },
   statInnerCompact: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 12,
     paddingVertical: 12,
   },
@@ -693,6 +693,7 @@ const styles = StyleSheet.create({
   statLabelCompact: {
     width: 64,
     fontSize: 9,
+    paddingTop: 4,
   },
   statBody: {
     gap: 3,

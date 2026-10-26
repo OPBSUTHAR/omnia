@@ -89,11 +89,13 @@ const styles = StyleSheet.create({
   },
   timerWrap: {
     flexGrow: 1,
+    flexShrink: 1,
     flexBasis: 330,
     minWidth: 280,
   },
   converterWrap: {
     flexGrow: 1.15,
+    flexShrink: 1,
     flexBasis: 380,
     minWidth: 280,
   },

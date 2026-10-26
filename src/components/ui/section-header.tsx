@@ -4,6 +4,7 @@ import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { AppText } from '@/components/ui/app-text';
 import { useTheme } from '@/features/theme/theme-provider';
 import { space } from '@/features/theme/tokens';
+import { useResponsive } from '@/lib/use-responsive';
 
 export function SectionHeader({
   eyebrow,
@@ -19,8 +20,9 @@ export function SectionHeader({
   style?: StyleProp<ViewStyle>;
 }) {
   const { theme } = useTheme();
+  const { isMobile } = useResponsive();
   return (
-    <View style={[styles.row, style]}>
+    <View style={[styles.row, isMobile ? styles.rowMobile : null, style]}>
       <View style={styles.copy}>
         {eyebrow ? (
           <AppText variant="caption" color={theme.accent} style={styles.eyebrow}>
@@ -34,7 +36,9 @@ export function SectionHeader({
           </AppText>
         ) : null}
       </View>
-      {action ? <View style={styles.action}>{action}</View> : null}
+      {action ? (
+        <View style={[styles.action, isMobile ? styles.actionMobile : null]}>{action}</View>
+      ) : null}
     </View>
   );
 }
@@ -46,6 +50,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: space.lg,
     marginBottom: space.lg,
+  },
+  rowMobile: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: space.sm,
   },
   copy: {
     flex: 1,
@@ -59,5 +68,8 @@ const styles = StyleSheet.create({
   },
   action: {
     paddingBottom: 2,
+  },
+  actionMobile: {
+    paddingBottom: 0,
   },
 });

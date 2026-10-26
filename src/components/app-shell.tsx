@@ -60,7 +60,12 @@ export function AppShell() {
   }, [pathname, router]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.bg }}>
+    <View
+      style={[
+        styles.root,
+        isDesktop ? styles.rootDesktop : null,
+        { backgroundColor: theme.bg },
+      ]}>
       {isDesktop ? <Sidebar pathname={pathname} /> : <MobileHeader pathname={pathname} />}
       <View style={styles.content}>
         <Slot />
@@ -316,6 +321,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     minWidth: 0,
+  },
+  root: {
+    flex: 1,
+  },
+  rootDesktop: {
+    flexDirection: 'row',
   },
   sidebar: {
     width: 264,
