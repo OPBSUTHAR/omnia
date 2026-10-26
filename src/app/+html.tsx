@@ -16,6 +16,7 @@ export default function Root({ children }: PropsWithChildren) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
         />
         <meta name="theme-color" content="#6D4AFF" />
+        <title>Omnia — One app. Every device.</title>
         <meta name="color-scheme" content="light dark" />
         <meta
           name="description"

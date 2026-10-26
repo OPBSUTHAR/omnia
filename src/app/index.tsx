@@ -183,22 +183,25 @@ export default function HomeScreen() {
           </View>
         </LinearGradient>
 
-        <View style={styles.statsRow}>
+        <View style={[styles.statsRow, isMobile ? styles.statsRowMobile : null]}>
           <StatTile
             label="Session"
             value={`${session?.emoji ?? '🙂'} ${session?.name ?? 'Friend'}`}
             sub="Local to this device"
+            compact={isMobile}
           />
           <StatTile
             label="Device"
             value={deviceName}
             sub={`${platformName} · ${viewport}`}
+            compact={isMobile}
           />
           <StatTile
             label="Build"
             value={`v${updates.currentVersion}`}
             sub={updates.hasUpdate ? `v${updates.feed?.version} ready` : 'Up to date'}
             tone={updates.hasUpdate ? theme.coral : theme.mint}
+            compact={isMobile}
           />
         </View>
 
@@ -396,27 +399,38 @@ function StatTile({
   value,
   sub,
   tone,
+  compact = false,
 }: {
   label: string;
   value: string;
   sub: string;
   tone?: string;
+  compact?: boolean;
 }) {
   const { theme } = useTheme();
   return (
-    <Card padded={false} style={styles.statCard}>
-      <View style={styles.statInner}>
-        <AppText variant="caption" color={theme.textFaint} style={styles.statLabel}>
+    <Card padded={false} style={[styles.statCard, compact ? styles.statCardCompact : null]}>
+      <View style={[styles.statInner, compact ? styles.statInnerCompact : null]}>
+        <AppText
+          variant="caption"
+          color={theme.textFaint}
+          style={[styles.statLabel, compact ? styles.statLabelCompact : null]}>
           {label}
         </AppText>
-        <AppText variant="h3" numberOfLines={1} style={styles.statValue}>
-          {value}
-        </AppText>
-        <View style={styles.statSubRow}>
-          {tone ? <View style={[styles.statDot, { backgroundColor: tone }]} /> : null}
-          <AppText variant="small" color={theme.textMuted} numberOfLines={1} style={styles.statSub}>
-            {sub}
+        <View style={[styles.statBody, compact ? styles.statBodyCompact : null]}>
+          <AppText variant="h3" numberOfLines={1} style={styles.statValue}>
+            {value}
           </AppText>
+          <View style={styles.statSubRow}>
+            {tone ? <View style={[styles.statDot, { backgroundColor: tone }]} /> : null}
+            <AppText
+              variant="small"
+              color={theme.textMuted}
+              numberOfLines={1}
+              style={styles.statSub}>
+              {sub}
+            </AppText>
+          </View>
         </View>
       </View>
     </Card>
@@ -649,17 +663,42 @@ const styles = StyleSheet.create({
     gap: 10,
     flexWrap: 'wrap',
   },
+  statsRowMobile: {
+    flexDirection: 'column',
+    gap: 8,
+  },
   statCard: {
     flex: 1,
     minWidth: 100,
+  },
+  statCardCompact: {
+    flex: 0,
+    flexBasis: 'auto',
+    minWidth: 0,
   },
   statInner: {
     padding: 14,
     gap: 4,
   },
+  statInnerCompact: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 12,
+  },
   statLabel: {
     fontSize: 8.5,
     letterSpacing: 1.2,
+  },
+  statLabelCompact: {
+    width: 64,
+    fontSize: 9,
+  },
+  statBody: {
+    gap: 3,
+  },
+  statBodyCompact: {
+    flex: 1,
   },
   statValue: {
     fontSize: 14.5,
