@@ -1,18 +1,18 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "releasedAt": "2026-10-26",
   "notes": [
-    "First public build — Omnia now lives on Android, the web and your desktop.",
-    "Local-first sessions with a name, a badge and a device identity.",
-    "Three working tools: a focus timer, a unit converter and an autosaving scratchpad.",
-    "Live update alerts: when a new build ships, Omnia tells you inside the app.",
-    "Light, dark and system themes with a phone-to-desktop responsive layout."
+    "Real Windows and Linux desktop installers built with Electron",
+    "The full web app now runs on Vercel; GitHub Pages is the install guide",
+    "Downloads live in the global app footer with direct links",
+    "Update dialog selects the right installer for each platform",
+    "Fixes for the desktop sidebar and mobile settings layout"
   ],
   "apkUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk",
   "windowsUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe",
   "linuxUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage",
   "webUrl": "https://omnia-suthara.vercel.app/",
   "docsUrl": "https://opbsuthar.github.io/omnia/",
-  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases",
+  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.1.0",
   "mandatory": false
 }
