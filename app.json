@@ -2,7 +2,7 @@
   "expo": {
     "name": "OrbisNova",
     "slug": "omnia",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "omnia",
@@ -12,11 +12,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.opbsuthar.omnia",
-      "buildNumber": "6"
+      "buildNumber": "7"
     },
     "android": {
       "package": "com.opbsuthar.omnia",
-      "versionCode": 6,
+      "versionCode": 7,
       "permissions": [
         "REQUEST_INSTALL_PACKAGES"
       ],
