@@ -47,6 +47,13 @@ const tools = [
     meta: 'Basic + scientific · offline',
   },
   {
+    icon: 'game-controller-outline' as const,
+    tone: 'coral' as const,
+    title: 'Tetris',
+    description: 'A full-color block-drop puzzle with ghost piece, hold, levels, preview and haptics.',
+    meta: 'Touch + keyboard · offline',
+  },
+  {
     icon: 'create-outline' as const,
     tone: 'mint' as const,
     title: 'Scratchpad',
@@ -264,7 +271,7 @@ export default function HomeScreen() {
           <SectionHeader
             eyebrow="The toolkit"
             title="Small tools. One home."
-            subtitle="The first four utilities are live. This is the seed of the everything-app."
+            subtitle="The first five utilities are live. This is the seed of the everything-app."
             action={
               <Button
                 label="Open tools"
