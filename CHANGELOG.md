@@ -6,6 +6,14 @@ All notable changes to Omnia are documented here. The format follows
 
 <!-- releases -->
 
+## [1.4.2] - 2026-10-27
+
+- Move downloads and update controls to Settings and make Home a greeting
+- Keep session, device, and build details in Settings and full toolkit on Tools
+- Refresh feed and Pages install links for the orbisnova repository
+- Same signing key so it updates over 1.4.1 and preserves data
+
+
 ## [1.4.1] - 2026-10-27
 
 - Update all public links and download mirrors to the renamed orbisnova repository

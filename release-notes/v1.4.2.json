@@ -1,0 +1,10 @@
+{
+  "version": "1.4.2",
+  "releasedAt": "2026-10-27",
+  "notes": [
+    "Move downloads and update controls to Settings and make Home a greeting",
+    "Keep session, device, and build details in Settings and full toolkit on Tools",
+    "Refresh feed and Pages install links for the orbisnova repository",
+    "Same signing key so it updates over 1.4.1 and preserves data"
+  ]
+}
