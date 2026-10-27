@@ -1,16 +1,17 @@
 {
-  "version": "1.4.1",
+  "version": "1.4.2",
   "releasedAt": "2026-10-27",
   "notes": [
-    "Update all public links and download mirrors to the renamed orbisnova repository",
-    "Feed and Pages mirror now resolve under OPBSUTHAR/orbisnova",
-    "Same signing key, installs over 1.4.0 and preserves data"
+    "Move downloads and update controls to Settings and make Home a greeting",
+    "Keep session, device, and build details in Settings and full toolkit on Tools",
+    "Refresh feed and Pages install links for the orbisnova repository",
+    "Same signing key so it updates over 1.4.1 and preserves data"
   ],
   "apkUrl": "https://opbsuthar.github.io/orbisnova/download/omnia.apk",
   "windowsUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-windows.exe",
   "linuxUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-linux.AppImage",
   "webUrl": "https://omnia-suthara.vercel.app/",
   "docsUrl": "https://opbsuthar.github.io/orbisnova/",
-  "releasesUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/tag/v1.4.1",
+  "releasesUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/tag/v1.4.2",
   "mandatory": false
 }
