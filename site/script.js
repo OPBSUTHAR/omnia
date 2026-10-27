@@ -55,10 +55,6 @@
         'Latest published build. Installed copies check this feed automatically.'
       );
 
-      if (feed.apkUrl) {
-        var android = document.getElementById('android-link');
-        if (android) android.href = feed.apkUrl;
-      }
       if (feed.windowsUrl) {
         var windows = document.getElementById('windows-link');
         if (windows) windows.href = feed.windowsUrl;

@@ -20,7 +20,7 @@ Built by [Omprakash Suthar (@OPBSUTHAR)](https://github.com/OPBSUTHAR).
 
 | Platform | Build | Link |
 | --- | --- | --- |
-| **Android** | Signed APK, Android 8+ | [omnia.apk](https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk) |
+| **Android** | Signed APK, Android 8+ | [omnia.apk](https://opbsuthar.github.io/omnia/download/omnia.apk) |
 | **Windows** | NSIS installer, 64-bit | [omnia-windows.exe](https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe) |
 | **Linux** | Portable AppImage, x86_64 | [omnia-linux.AppImage](https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage) |
 | **Web** | Full React app | [omnia-suthara.vercel.app](https://omnia-suthara.vercel.app/) |

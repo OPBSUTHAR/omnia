@@ -7,7 +7,7 @@
     "Fixes the browser download that stopped at 100 percent and never returned to the app.",
     "Your session, scratchpad and settings are preserved."
   ],
-  "apkUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk",
+  "apkUrl": "https://opbsuthar.github.io/omnia/download/omnia.apk",
   "windowsUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe",
   "linuxUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage",
   "webUrl": "https://omnia-suthara.vercel.app/",

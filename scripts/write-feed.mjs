@@ -42,7 +42,7 @@ const feed = {
   version,
   releasedAt,
   notes: notes ?? ['Maintenance release with small fixes and polish.'],
-  apkUrl: `${repo}/releases/latest/download/omnia.apk`,
+  apkUrl: 'https://opbsuthar.github.io/omnia/download/omnia.apk',
   windowsUrl: `${repo}/releases/latest/download/omnia-windows.exe`,
   linuxUrl: `${repo}/releases/latest/download/omnia-linux.AppImage`,
   webUrl: 'https://omnia-suthara.vercel.app/',

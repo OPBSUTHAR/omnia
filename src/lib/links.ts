@@ -11,7 +11,7 @@ export const DOCS_URL = `https://${GITHUB_OWNER.toLowerCase()}.github.io/${REPO_
 export const WEB_URL = APP_WEB_URL;
 
 /** Release assets use fixed names so "latest/download" links never rot. */
-export const LATEST_APK_URL = `${REPO_URL}/releases/latest/download/omnia.apk`;
+export const LATEST_APK_URL = 'https://opbsuthar.github.io/omnia/download/omnia.apk';
 export const LATEST_WINDOWS_URL = `${REPO_URL}/releases/latest/download/omnia-windows.exe`;
 export const LATEST_LINUX_URL = `${REPO_URL}/releases/latest/download/omnia-linux.AppImage`;
 

@@ -51,6 +51,7 @@ example
 # release helpers
 release-body.md
 .vercel/
+site/download/*.apk
 
 .vercel
 .env*

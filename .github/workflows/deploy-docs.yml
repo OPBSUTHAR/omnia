@@ -28,6 +28,15 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Mirror the latest APK for cookie-free downloads
+        run: |
+          mkdir -p site/download
+          curl -fL --retry 3 --retry-all-errors --retry-delay 5 \
+            -o site/download/omnia.apk \
+            https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk
+          test "$(stat -c%s site/download/omnia.apk)" -gt 50000000
+          ls -lh site/download/omnia.apk
+
       - name: Upload install guide
         uses: actions/upload-pages-artifact@v3
         with:
