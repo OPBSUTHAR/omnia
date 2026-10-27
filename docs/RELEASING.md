@@ -82,7 +82,7 @@ Desktop builds are currently unsigned. No certificate secret is required.
    ```
 
 6. Wait for `release.yml` (jobs: Android, Windows desktop, Linux desktop, Publish). It
-   publishes `https://github.com/OPBSUTHAR/omnia/releases/tag/vX.Y.Z` with:
+   publishes `https://github.com/OPBSUTHAR/orbisnova/releases/tag/vX.Y.Z` with:
 
    - `omnia.apk`
    - `omnia-windows.exe`
@@ -93,9 +93,9 @@ Desktop builds are currently unsigned. No certificate secret is required.
 7. Verify downloads:
 
    ```bash
-   curl -I https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia.apk
-   curl -I https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe
-   curl -I https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage
+   curl -I https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia.apk
+   curl -I https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-windows.exe
+   curl -I https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-linux.AppImage
    ```
 
 8. Verify the feed:

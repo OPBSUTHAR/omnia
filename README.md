@@ -20,13 +20,13 @@ Built by [Omprakash Suthar (@OPBSUTHAR)](https://github.com/OPBSUTHAR).
 
 | Platform | Build | Link |
 | --- | --- | --- |
-| **Android** | Signed APK, Android 8+ | [omnia.apk](https://opbsuthar.github.io/omnia/download/omnia.apk) |
-| **Windows** | NSIS installer, 64-bit | [omnia-windows.exe](https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe) |
-| **Linux** | Portable AppImage, x86_64 | [omnia-linux.AppImage](https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage) |
+| **Android** | Signed APK, Android 8+ | [omnia.apk](https://opbsuthar.github.io/orbisnova/download/omnia.apk) |
+| **Windows** | NSIS installer, 64-bit | [omnia-windows.exe](https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-windows.exe) |
+| **Linux** | Portable AppImage, x86_64 | [omnia-linux.AppImage](https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-linux.AppImage) |
 | **Web** | Full React app | [omnia-suthara.vercel.app](https://omnia-suthara.vercel.app/) |
 | **iPhone / iPad** | Safari → Share → Add to Home Screen | [Web app](https://omnia-suthara.vercel.app/) |
 
-Step-by-step instructions live at **[opbsuthar.github.io/omnia](https://opbsuthar.github.io/omnia/)**.
+Step-by-step instructions live at **[opbsuthar.github.io/orbisnova](https://opbsuthar.github.io/orbisnova/)**.
 The download links also appear in the footer of every app screen.
 
 Every install keeps its own session: a display name, an emoji badge, and a generated

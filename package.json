@@ -7,9 +7,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OPBSUTHAR/omnia.git"
+    "url": "https://github.com/OPBSUTHAR/orbisnova.git"
   },
-  "homepage": "https://opbsuthar.github.io/omnia/",
+  "homepage": "https://opbsuthar.github.io/orbisnova/",
   "main": "expo-router/entry",
   "engines": {
     "node": ">=20"

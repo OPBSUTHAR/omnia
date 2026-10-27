@@ -7,11 +7,11 @@
     "Updated the website, docs and desktop installers with the OrbisNova identity.",
     "Kept the existing package and signing key, so this build updates over 1.2.1 and preserves your data."
   ],
-  "apkUrl": "https://opbsuthar.github.io/omnia/download/omnia.apk",
-  "windowsUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe",
-  "linuxUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage",
+  "apkUrl": "https://opbsuthar.github.io/orbisnova/download/omnia.apk",
+  "windowsUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-windows.exe",
+  "linuxUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-linux.AppImage",
   "webUrl": "https://omnia-suthara.vercel.app/",
-  "docsUrl": "https://opbsuthar.github.io/omnia/",
-  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.3.0",
+  "docsUrl": "https://opbsuthar.github.io/orbisnova/",
+  "releasesUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/tag/v1.3.0",
   "mandatory": false
 }
