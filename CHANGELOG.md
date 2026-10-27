@@ -6,6 +6,14 @@ All notable changes to Omnia are documented here. The format follows
 
 <!-- releases -->
 
+## [1.4.0] - 2026-10-27
+
+- Add in-game Tetris with ghost, hold, scoring and levels
+- Full touch controls for phone, arrow keys and Space on desktop
+- Refresh the toolkit to five live utilities
+- Same package, key and data preserved
+
+
 ## [1.3.0] - 2026-10-27
 
 - Rebranded the app as OrbisNova with a new globe icon and refreshed interface.

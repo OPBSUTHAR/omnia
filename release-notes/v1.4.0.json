@@ -1,0 +1,10 @@
+{
+  "version": "1.4.0",
+  "releasedAt": "2026-10-27",
+  "notes": [
+    "Add in-game Tetris with ghost, hold, scoring and levels",
+    "Full touch controls for phone, arrow keys and Space on desktop",
+    "Refresh the toolkit to five live utilities",
+    "Same package, key and data preserved"
+  ]
+}
