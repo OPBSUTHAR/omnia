@@ -1,4 +1,4 @@
-/* Omnia's service worker keeps the shell installable and fast.
+/* OrbisNova's service worker keeps the shell installable and fast.
    It is deliberately network-first so a fresh deploy wins whenever the
    device is online. The update feed is never cached. */
 

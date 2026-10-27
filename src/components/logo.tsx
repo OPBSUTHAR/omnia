@@ -1,43 +1,107 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import { AppText } from '@/components/ui/app-text';
 import { fonts } from '@/features/theme/tokens';
 
-export function Logo({ size = 36 }: { size?: number }) {
-  const ring = Math.round(size * 0.46);
+type LogoProps = {
+  size?: number;
+};
+
+/**
+ * OrbisNova mark: a new world of everyday tools. The globe is drawn with
+ * two parallels and a meridian, orbited by a small gold nova.
+ */
+export function Logo({ size = 36 }: LogoProps) {
+  const radius = Math.round(size * 0.28);
+  const globe = size * 0.56;
+  const stroke = Math.max(1.1, size * 0.032);
+
   return (
     <LinearGradient
-      colors={['#6D4AFF', '#A855F7', '#FF7A59']}
+      colors={['#0B1030', '#0E3A47', '#251047']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={{
         width: size,
         height: size,
-        borderRadius: Math.round(size * 0.3),
+        borderRadius: radius,
+        overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
       }}>
       <View
         style={{
-          width: ring,
-          height: ring,
-          borderRadius: ring,
-          borderWidth: Math.max(2, Math.round(size * 0.075)),
-          borderColor: '#FFFFFF',
+          position: 'absolute',
+          width: size * 0.8,
+          height: size * 0.8,
+          borderRadius: size * 0.4,
+          backgroundColor: 'rgba(59, 224, 174, 0.13)',
+          top: -size * 0.25,
+          left: -size * 0.2,
         }}
       />
       <View
         style={{
+          width: globe,
+          height: globe,
+          borderRadius: globe / 2,
+          borderWidth: stroke,
+          borderColor: 'rgba(229, 250, 255, 0.92)',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+        }}>
+        <View
+          style={{
+            position: 'absolute',
+            top: globe * 0.27,
+            width: globe * 0.86,
+            height: stroke * 0.8,
+            backgroundColor: 'rgba(229, 250, 255, 0.68)',
+          }}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            top: globe * 0.69,
+            width: globe * 0.86,
+            height: stroke * 0.8,
+            backgroundColor: 'rgba(229, 250, 255, 0.5)',
+          }}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            width: globe * 0.48,
+            height: globe,
+            borderRadius: globe * 0.48,
+            borderWidth: stroke * 0.85,
+            borderColor: 'rgba(229, 250, 255, 0.55)',
+          }}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            width: globe * 0.16,
+            height: globe * 0.16,
+            borderRadius: globe * 0.08,
+            backgroundColor: 'rgba(59, 224, 174, 0.9)',
+          }}
+        />
+      </View>
+      <View
+        style={{
           position: 'absolute',
-          top: Math.round(size * 0.19),
-          right: Math.round(size * 0.2),
-          width: Math.max(4, Math.round(size * 0.11)),
-          height: Math.max(4, Math.round(size * 0.11)),
-          borderRadius: size,
+          width: size * 0.13,
+          height: size * 0.13,
+          borderRadius: size * 0.065,
           backgroundColor: '#FFD166',
-          borderWidth: 1,
-          borderColor: 'rgba(255,255,255,0.65)',
+          top: size * 0.13,
+          right: size * 0.13,
+          shadowColor: '#FFD166',
+          shadowOpacity: 0.8,
+          shadowRadius: size * 0.08,
+          shadowOffset: { width: 0, height: 0 },
         }}
       />
     </LinearGradient>
@@ -48,38 +112,27 @@ export function Wordmark({
   size = 36,
   color = '#FFFFFF',
   subtitle,
-}: {
-  size?: number;
-  color?: string;
-  subtitle?: string;
-}) {
+}: LogoProps & { color?: string; subtitle?: string }) {
   return (
     <View style={styles.row}>
       <Logo size={size} />
       <View style={styles.copy}>
-        <AppText
-          style={{
-            color,
-            fontFamily: fonts.bold,
-            fontSize: size * 0.52,
-            lineHeight: size * 0.58,
-            letterSpacing: -0.8,
-          }}>
-          Omnia
-        </AppText>
-        {subtitle ? (
-          <AppText
-            style={{
+        <Text
+          numberOfLines={1}
+          style={[
+            styles.wordmark,
+            {
               color,
-              opacity: 0.55,
-              fontFamily: fonts.medium,
-              fontSize: 9.5,
-              letterSpacing: 1.6,
-              textTransform: 'uppercase',
-              marginTop: 2,
-            }}>
+              fontSize: size * 0.44,
+              lineHeight: size * 0.5,
+            },
+          ]}>
+          OrbisNova
+        </Text>
+        {subtitle ? (
+          <Text numberOfLines={1} style={[styles.subtitle, { color }]}>
             {subtitle}
-          </AppText>
+          </Text>
         ) : null}
       </View>
     </View>
@@ -90,9 +143,22 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 11,
+    gap: 10,
   },
   copy: {
-    justifyContent: 'center',
+    gap: 1,
+    flexShrink: 1,
+  },
+  wordmark: {
+    fontFamily: fonts.bold,
+    letterSpacing: -0.7,
+  },
+  subtitle: {
+    fontFamily: fonts.medium,
+    fontSize: 9,
+    lineHeight: 12,
+    letterSpacing: 1.4,
+    textTransform: 'uppercase',
+    opacity: 0.55,
   },
 });

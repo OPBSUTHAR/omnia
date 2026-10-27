@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+    <defs>
+    <clipPath id="globeClip"><circle cx="512" cy="512" r="284" /></clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B0914" />
+      <stop offset="0.48" stop-color="#122A3A" />
+      <stop offset="1" stop-color="#2A1240" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="34%" r="66%">
+      <stop offset="0" stop-color="#3BE0AE" stop-opacity="0.28" />
+      <stop offset="0.55" stop-color="#A78BFA" stop-opacity="0.12" />
+      <stop offset="1" stop-color="#A78BFA" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+    <rect width="1024" height="1024" fill="url(#bg)" />
+    <rect width="1024" height="1024" fill="url(#glow)" />
+    
+    <g clip-path="url(#globeClip)">
+      <circle cx="512" cy="512" r="292" fill="none" stroke="#F7F5FF" stroke-width="34" />
+      <ellipse cx="512" cy="512" rx="122.64" ry="292" fill="none" stroke="#F7F5FF" stroke-width="34" opacity="0.9" />
+      <line x1="220" y1="360.15999999999997" x2="804" y2="360.15999999999997" stroke="#F7F5FF" stroke-width="34" opacity="0.9" />
+      <line x1="220" y1="663.84" x2="804" y2="663.84" stroke="#F7F5FF" stroke-width="34" opacity="0.9" />
+    </g>
+    <circle cx="512" cy="512" r="35.04" fill="#3BE0AE" />
+    <circle cx="739.76" cy="284.24" r="40.88" fill="#FFD166" />
+           <path d="M 693.04 237.52000000000004 A 122.64 122.64 0 0 1 798.16 342.64" fill="none" stroke="#FFD166" stroke-width="18.700000000000003" stroke-linecap="round" opacity="0.8" />
+  
+  </svg>

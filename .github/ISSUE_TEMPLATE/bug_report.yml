@@ -1,12 +1,12 @@
 name: Bug report
-description: Something in Omnia is broken or behaves unexpectedly.
+description: Something in OrbisNova is broken or behaves unexpectedly.
 title: '[Bug] '
 labels: ['bug']
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for testing Omnia. Please include enough detail to reproduce the issue.
+        Thanks for testing OrbisNova. Please include enough detail to reproduce the issue.
         For security problems, use the private advisory link in SECURITY.md instead.
   - type: dropdown
     id: platform
@@ -22,7 +22,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: Omnia version
+      label: OrbisNova version
       description: Shown in Settings → About and in the footer.
       placeholder: 1.0.0
     validations:
@@ -32,7 +32,7 @@ body:
     attributes:
       label: Steps to reproduce
       placeholder: |
-        1. Open Omnia
+        1. Open OrbisNova
         2. Go to Tools
         3. ...
     validations:

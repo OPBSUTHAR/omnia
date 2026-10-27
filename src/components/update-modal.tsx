@@ -43,7 +43,7 @@ export function UpdateModal() {
             Update available
           </AppText>
           <AppText variant="h2" style={styles.title}>
-            Omnia {feed.version}
+            OrbisNova {feed.version}
           </AppText>
         </View>
         {mandatory ? (
@@ -86,7 +86,7 @@ export function UpdateModal() {
         <AppText variant="caption" color={theme.textMuted} style={styles.notesTitle}>
           What&apos;s new
         </AppText>
-        {(feed.notes.length > 0 ? feed.notes : ['A fresh build of Omnia is ready.']).map(
+        {(feed.notes.length > 0 ? feed.notes : ['A fresh build of OrbisNova is ready.']).map(
           (note) => (
             <View key={note} style={styles.noteRow}>
               <View style={[styles.noteDot, { backgroundColor: theme.accent }]} />
@@ -102,8 +102,8 @@ export function UpdateModal() {
         <Ionicons name="information-circle" size={17} color={theme.accent} />
         <AppText variant="small" color={theme.textMuted} style={styles.calloutText}>
           {mandatory
-            ? 'This build is required to keep using Omnia. Install it to continue.'
-            : 'Omnia downloads the APK inside the app, then opens the Android installer. Your session, notes and settings stay intact.'}
+            ? 'This build is required to keep using OrbisNova. Install it to continue.'
+            : 'OrbisNova downloads the APK inside the app, then opens the Android installer. Your session, notes and settings stay intact.'}
         </AppText>
       </View>
 
@@ -119,8 +119,8 @@ export function UpdateModal() {
           </View>
           <ProgressBar progress={installProgress ?? 0} height={6} />
           <AppText variant="small" color={theme.textMuted} style={styles.progressHint}>
-            Keep Omnia open. The system installer will open automatically; if Android asks,
-            allow installs from Omnia.
+            Keep OrbisNova open. The system installer will open automatically; if Android asks,
+            allow installs from OrbisNova.
           </AppText>
         </View>
       ) : null}

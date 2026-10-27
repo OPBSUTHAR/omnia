@@ -8,6 +8,7 @@ import { Screen } from '@/components/ui/screen';
 import { useTheme } from '@/features/theme/theme-provider';
 import { fonts, radius, space } from '@/features/theme/tokens';
 import { FocusTimer } from '@/features/tools/focus-timer';
+import { Calculator } from '@/features/tools/calculator';
 import { Scratchpad } from '@/features/tools/scratchpad';
 import { UnitConverter } from '@/features/tools/unit-converter';
 import { useResponsive } from '@/lib/use-responsive';
@@ -22,13 +23,13 @@ export default function ToolsScreen() {
     <Screen>
       <View style={styles.stack}>
         <View style={styles.header}>
-          <Badge label="Toolkit · 3 live" tone="accent" dot />
+          <Badge label="Toolkit · 4 live" tone="accent" dot />
           <AppText variant="displaySmall" style={styles.title}>
             Small tools.{'\n'}One home.
           </AppText>
           <AppText variant="body" color={theme.textMuted} style={styles.lede}>
-            The first three utilities are wired up and working offline. Each one is a building
-            block for the everything-app Omnia is becoming.
+            The first four utilities are wired up and working offline. Each one is a building
+            block for the everything-app OrbisNova is becoming.
           </AppText>
         </View>
 
@@ -40,6 +41,8 @@ export default function ToolsScreen() {
             <UnitConverter />
           </View>
         </View>
+
+        <Calculator />
 
         <Scratchpad />
 

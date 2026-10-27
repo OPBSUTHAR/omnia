@@ -189,12 +189,12 @@ function Sidebar({ pathname }: { pathname: string }) {
         <View style={styles.footerRow}>
           <View style={[styles.liveDot, { backgroundColor: theme.mint }]} />
           <AppText variant="caption" color={theme.textFaint}>
-            Omnia v{currentVersion}
+            OrbisNova v{currentVersion}
           </AppText>
         </View>
         <Pressable
           accessibilityRole="link"
-          accessibilityLabel="Open Omnia on GitHub"
+          accessibilityLabel="Open OrbisNova on GitHub"
           onPress={() => void Linking.openURL(REPO_URL)}
           style={({ pressed }) => [styles.githubButton, { opacity: pressed ? 0.6 : 1 }]}>
           <Ionicons name="logo-github" size={16} color={theme.textFaint} />

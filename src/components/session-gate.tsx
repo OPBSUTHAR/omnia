@@ -89,7 +89,7 @@ export function SessionGate() {
 
           <View style={[styles.main, isDesktop ? styles.mainDesktop : null]}>
             <View style={styles.pitch}>
-              <AppText style={styles.eyebrow}>Welcome to Omnia</AppText>
+              <AppText style={styles.eyebrow}>Welcome to OrbisNova</AppText>
               <AppText style={[styles.display, isDesktop ? null : styles.displayMobile]}>
                 Everything you need.{'\n'}On every screen.
               </AppText>

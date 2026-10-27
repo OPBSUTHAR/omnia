@@ -1,5 +1,5 @@
 /**
- * Points the generated Android release build at the Omnia keystore.
+ * Points the generated Android release build at the OrbisNova keystore.
  *
  * Run this after `expo prebuild` and before `./gradlew assembleRelease`.
  * The keystore itself is never committed; CI restores it from secrets and
@@ -75,4 +75,4 @@ patched =
   beforeRelease + afterRelease.replace('signingConfig signingConfigs.debug', 'signingConfig signingConfigs.omniaRelease');
 
 await writeFile(gradlePath, patched);
-console.log('Configured android/app/build.gradle to sign release builds with the Omnia keystore.');
+console.log('Configured android/app/build.gradle to sign release builds with the OrbisNova keystore.');

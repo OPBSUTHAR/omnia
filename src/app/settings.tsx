@@ -84,7 +84,7 @@ export default function SettingsScreen() {
 
   const resetDevice = () => {
     confirmAction({
-      title: 'Reset Omnia on this device?',
+      title: 'Reset OrbisNova on this device?',
       message:
         'This clears your session, scratchpad, theme and update history. The app stays installed and you can start fresh.',
       confirmLabel: 'Reset everything',
@@ -121,7 +121,7 @@ export default function SettingsScreen() {
           <AppText variant="caption" color={theme.accent}>
             Settings
           </AppText>
-          <AppText variant="displaySmall">Make Omnia yours.</AppText>
+          <AppText variant="displaySmall">Make OrbisNova yours.</AppText>
           <AppText variant="body" color={theme.textMuted} style={styles.lede}>
             Everything here is local to this device. No account, no server, no tracking.
           </AppText>
@@ -244,7 +244,7 @@ export default function SettingsScreen() {
           <SectionHeader
             eyebrow="Delivery"
             title="Updates"
-            subtitle="Omnia is distributed directly through GitHub — no store review, no waiting."
+            subtitle="OrbisNova is distributed directly through GitHub — no store review, no waiting."
             action={
               <Button
                 label={updates.hasUpdate ? 'View update' : 'Check now'}
@@ -267,7 +267,7 @@ export default function SettingsScreen() {
                 ]}>
                 <Ionicons name="sparkles" size={16} color={theme.coral} />
                 <AppText variant="small" color={theme.coral} style={styles.bannerText}>
-                  Omnia {updates.feed?.version} is published. Install it over this build — your
+                  OrbisNova {updates.feed?.version} is published. Install it over this build — your
                   session stays intact.
                 </AppText>
                 <Button
@@ -329,7 +329,7 @@ export default function SettingsScreen() {
             <View style={styles.cardHeader}>
               <IconTile name="information-circle-outline" tone="coral" size={40} iconSize={19} />
               <View style={styles.cardHeaderText}>
-                <AppText variant="h3">About Omnia</AppText>
+                <AppText variant="h3">About OrbisNova</AppText>
                 <AppText variant="small" color={theme.textMuted}>
                   One app. Every device.
                 </AppText>
@@ -367,7 +367,7 @@ export default function SettingsScreen() {
             </View>
             <AppText variant="small" color={theme.textMuted}>
               Your session, scratchpad and preferences are stored with the platform’s local
-              storage. Omnia never uploads them. Clearing this device’s storage removes them.
+              storage. OrbisNova never uploads them. Clearing this device’s storage removes them.
             </AppText>
             <View style={[styles.dataBox, { backgroundColor: theme.dangerSoft }]}>
               <AppText variant="small" color={theme.danger} style={styles.bannerText}>

@@ -27,7 +27,7 @@ try {
 }
 
 const body = [
-  `## Omnia ${version}`,
+  `## OrbisNova ${version}`,
   '',
   `Released ${releasedAt}.`,
   '',
@@ -37,11 +37,11 @@ const body = [
   '',
   '### Install',
   '',
-  '- **Android:** download `omnia.apk` below and open it. It installs over any previous Omnia build signed with the same key.',
+  '- **Android:** download `omnia.apk` below and open it. It installs over any previous OrbisNova build signed with the same key.',
   '- **Windows, Linux, macOS:** open https://opbsuthar.github.io/omnia/ and install it as an app from Chrome or Edge.',
   '- **iPhone / iPad:** open the same link in Safari, then Share → Add to Home Screen.',
   '',
-  'Installed copies of Omnia pick this release up automatically through the in-app update feed.',
+  'Installed copies of OrbisNova pick this release up automatically through the in-app update feed.',
   '',
   '---',
   '',

@@ -40,6 +40,13 @@ const tools = [
     meta: '6 units · instant',
   },
   {
+    icon: 'calculator-outline' as const,
+    tone: 'mint' as const,
+    title: 'Calculator',
+    description: 'A universal calculator with scientific functions, constants and a running history.',
+    meta: 'Basic + scientific · offline',
+  },
+  {
     icon: 'create-outline' as const,
     tone: 'mint' as const,
     title: 'Scratchpad',
@@ -86,7 +93,7 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.heroTopRow}>
-            <Badge label="Omnia · Live" tone="glass" dot />
+            <Badge label="OrbisNova · Live" tone="glass" dot />
             <AppText style={styles.heroDate}>{today}</AppText>
           </View>
 
@@ -159,7 +166,7 @@ export default function HomeScreen() {
           <SectionHeader
             eyebrow="Stay current"
             title="Live updates, built in"
-            subtitle="Omnia checks its release feed when it opens, when you come back, and every four minutes. The dialog appears the moment a new build is published."
+            subtitle="OrbisNova checks its release feed when it opens, when you come back, and every four minutes. The dialog appears the moment a new build is published."
             action={
               <Button
                 label="Check now"
@@ -183,7 +190,7 @@ export default function HomeScreen() {
                   <View style={styles.updateTitleRow}>
                     <AppText variant="h3">
                       {updates.hasUpdate
-                        ? `Omnia ${updates.feed?.version} is ready`
+                        ? `OrbisNova ${updates.feed?.version} is ready`
                         : `You're on the latest build`}
                     </AppText>
                     <Badge
@@ -257,7 +264,7 @@ export default function HomeScreen() {
           <SectionHeader
             eyebrow="The toolkit"
             title="Small tools. One home."
-            subtitle="The first three utilities are live. This is the seed of the everything-app."
+            subtitle="The first four utilities are live. This is the seed of the everything-app."
             action={
               <Button
                 label="Open tools"

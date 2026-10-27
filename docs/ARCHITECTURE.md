@@ -1,6 +1,6 @@
 # Architecture
 
-Omnia is one Expo Router codebase rendered three ways:
+OrbisNova is one Expo Router codebase rendered three ways:
 
 1. **Android** — a native React Native app packaged as a signed APK.
 2. **Web** — the same routes exported as a static React site and served by Vercel.

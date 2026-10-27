@@ -1,9 +1,9 @@
 {
   "name": "omnia-desktop",
-  "productName": "Omnia",
+  "productName": "OrbisNova",
   "version": "1.0.0",
   "private": true,
-  "description": "Omnia desktop shell for Windows and Linux.",
+  "description": "OrbisNova desktop shell for Windows and Linux.",
   "author": {
     "name": "Omprakash Suthar",
     "email": "178475619+OPBSUTHAR@users.noreply.github.com",
@@ -24,7 +24,7 @@
   },
   "build": {
     "appId": "com.opbsuthar.omnia",
-    "productName": "Omnia",
+    "productName": "OrbisNova",
     "copyright": "Copyright © 2026 Omprakash Suthar (@OPBSUTHAR)",
     "directories": {
       "output": "release",
@@ -53,7 +53,7 @@
       "perMachine": false,
       "allowElevation": true,
       "deleteAppDataOnUninstall": false,
-      "shortcutName": "Omnia",
+      "shortcutName": "OrbisNova",
       "createDesktopShortcut": "always",
       "createStartMenuShortcut": true
     },

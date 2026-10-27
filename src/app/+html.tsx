@@ -14,13 +14,13 @@ export default function Root({ children }: PropsWithChildren) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
         />
         <meta name="theme-color" content="#6D4AFF" />
-        <title>Omnia — One app. Every device.</title>
+        <title>OrbisNova — One app. Every device.</title>
         <meta name="color-scheme" content="light dark" />
         <meta
           name="description"
-          content="Omnia — one app, every device. A local-first toolkit with live in-app update alerts, built by Omprakash Suthar (@OPBSUTHAR)."
+          content="OrbisNova — one app, every device. A local-first toolkit with live in-app update alerts, built by Omprakash Suthar (@OPBSUTHAR)."
         />
-        <meta property="og:title" content="Omnia — One app. Every device." />
+        <meta property="og:title" content="OrbisNova — One app. Every device." />
         <meta
           property="og:description"
           content="A local-first toolkit for every screen you own. Focus timer, converter, scratchpad and live update alerts."
@@ -33,7 +33,7 @@ export default function Root({ children }: PropsWithChildren) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Omnia" />
+        <meta name="apple-mobile-web-app-title" content="OrbisNova" />
 
         <ScrollViewStyleReset />
         <style dangerouslySetInnerHTML={{ __html: globalStyles }} />

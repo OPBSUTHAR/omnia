@@ -28,13 +28,13 @@ export function getPlatformName(): string {
     return Device.osVersion ? `iOS ${Device.osVersion}` : 'iOS';
   }
   if (isElectron()) {
-    return getDesktopPlatform() === 'linux' ? 'Omnia for Linux' : 'Omnia for Windows';
+    return getDesktopPlatform() === 'linux' ? 'OrbisNova for Linux' : 'OrbisNova for Windows';
   }
   return getBrowserName();
 }
 
 export function getBrowserName(): string {
-  if (isElectron()) return 'Omnia desktop';
+  if (isElectron()) return 'OrbisNova desktop';
   if (typeof navigator === 'undefined') return 'Web';
   const ua = navigator.userAgent;
   if (/Edg\//.test(ua)) return 'Edge';

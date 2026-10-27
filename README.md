@@ -1,8 +1,8 @@
-# Omnia
+# OrbisNova
 
 **One app. Every device.**
 
-Omnia is a local-first, cross-platform workspace with one shared codebase:
+OrbisNova is a local-first, cross-platform workspace with one shared codebase:
 
 - a signed **Android APK**,
 - a real **Windows installer** and **Linux AppImage** built with Electron,
@@ -42,7 +42,7 @@ create.
 - **Settings** — profile editing, light/dark/system theme, auto update checks, manual
   update checks, release notes, links and a full local-data reset.
 - **Update dialog** — checks on launch, on foreground, every 4 minutes, and on demand.
-  When the feed is newer than the installed build, Omnia shows release notes and the
+  When the feed is newer than the installed build, OrbisNova shows release notes and the
   installer for the current platform.
 - **Global footer** — Android, Windows, Linux and web builds plus the install guide.
 
@@ -155,7 +155,7 @@ The app and the install guide intentionally have different jobs:
   application after hydration; downloads are not the point of the page.
 - **GitHub Pages** serves `site/`, a static guide with screenshots, install steps,
   release notes and direct installer links. It keeps working even if the app host is
-  unavailable and it removes the old Omnia service worker from returning visitors.
+  unavailable and it removes the old OrbisNova service worker from returning visitors.
 
 `src/lib/links.ts` and `scripts/write-feed.mjs` are the two places that hold the public
 app/docs URLs. Update both if the Vercel project gets a different domain.

@@ -21,7 +21,7 @@ export default function NotFoundScreen() {
         <AppText variant="displaySmall">404</AppText>
         <AppText variant="h3">This room isn&apos;t built yet.</AppText>
         <AppText variant="body" color={theme.textMuted}>
-          The page you followed doesn&apos;t exist in this build of Omnia. Head back home — the
+          The page you followed doesn&apos;t exist in this build of OrbisNova. Head back home — the
           rest of the app is waiting.
         </AppText>
         <Button label="Back to home" icon="arrow-back" onPress={() => router.replace('/')} />

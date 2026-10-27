@@ -153,7 +153,7 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
         if (manual) {
           showToast(
             newer
-              ? `Omnia ${parsed.version} is ready — you're on v${CURRENT_VERSION}.`
+              ? `OrbisNova ${parsed.version} is ready — you're on v${CURRENT_VERSION}.`
               : `You're on the latest build (v${CURRENT_VERSION}).`,
             { kind: newer ? 'info' : 'success' }
           );
@@ -282,7 +282,7 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
             'android.settings.MANAGE_UNKNOWN_APP_SOURCES',
             { data: `package:${packageName}` }
           ).catch(() => undefined);
-          showToast('Allow Omnia to install apps, then tap Update again.', { kind: 'error' });
+          showToast('Allow OrbisNova to install apps, then tap Update again.', { kind: 'error' });
         } else {
           showToast(`Update failed: ${message}`, { kind: 'error' });
         }
@@ -301,7 +301,7 @@ export function UpdatesProvider({ children }: PropsWithChildren) {
       }
       showToast(
         desktop
-          ? 'Download started — run the installer to update Omnia.'
+          ? 'Download started — run the installer to update OrbisNova.'
           : 'Opening the latest build in a new tab.',
         { kind: 'success' }
       );

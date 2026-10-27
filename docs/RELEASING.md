@@ -1,6 +1,6 @@
-# Releasing Omnia
+# Releasing OrbisNova
 
-Omnia is released from a version tag. One tag drives the signed Android APK, the Windows
+OrbisNova is released from a version tag. One tag drives the signed Android APK, the Windows
 installer, the Linux AppImage, the public update feed, the Vercel deployment and the
 GitHub Pages guide. Installed apps discover the release through the feed and show the
 in-app update dialog.
@@ -19,7 +19,7 @@ New-Item -ItemType Directory -Force D:\vscode\.omnia-secrets | Out-Null
   -alias omnia `
   -keyalg RSA -keysize 2048 -validity 10000 `
   -storepass "<password>" -keypass "<password>" `
-  -dname "CN=Omprakash Suthar, OU=Omnia, O=OPBSUTHAR, C=IN"
+  -dname "CN=Omprakash Suthar, OU=OrbisNova, O=OPBSUTHAR, C=IN"
 ```
 
 Back this file up somewhere outside the repository. If it is lost, existing installs

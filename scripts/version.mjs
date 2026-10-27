@@ -49,7 +49,7 @@ let changelog = '';
 try {
   changelog = await readFile(changelogPath, 'utf8');
 } catch {
-  changelog = '# Changelog\n\nAll notable changes to Omnia are documented here.\n\n<!-- releases -->\n';
+  changelog = '# Changelog\n\nAll notable changes to OrbisNova are documented here.\n\n<!-- releases -->\n';
 }
 const entry = `\n## [${next}] - ${today}\n\n${releaseNotes.map((note) => `- ${note}`).join('\n')}\n`;
 if (changelog.includes(marker)) {
@@ -59,7 +59,7 @@ if (changelog.includes(marker)) {
 }
 await writeFile(changelogPath, changelog);
 
-console.log(`\nOmnia ${current} → ${next} (Android versionCode ${app.expo.android.versionCode})\n`);
+console.log(`\nOrbisNova ${current} → ${next} (Android versionCode ${app.expo.android.versionCode})\n`);
 console.log('Next steps:');
 console.log(`  git add -A`);
 console.log(`  git commit -m "release: v${next}"`);

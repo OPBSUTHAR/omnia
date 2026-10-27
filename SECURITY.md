@@ -1,6 +1,6 @@
 # Security policy
 
-Omnia is a local-first app. It has no backend, no accounts and no telemetry. Sessions,
+OrbisNova is a local-first app. It has no backend, no accounts and no telemetry. Sessions,
 preferences, notes and tool history are stored only on the device that created them.
 
 ## Supported versions

@@ -67,4 +67,4 @@ try {
   // The lockfile is optional for local development; CI regenerates it via npm ci.
 }
 
-console.log(`Desktop payload ready in desktop/app (Omnia ${version}).`);
+console.log(`Desktop payload ready in desktop/app (OrbisNova ${version}).`);
