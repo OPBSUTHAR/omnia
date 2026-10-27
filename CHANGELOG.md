@@ -6,6 +6,14 @@ All notable changes to Omnia are documented here. The format follows
 
 <!-- releases -->
 
+## [1.3.0] - 2026-10-27
+
+- Rebranded the app as OrbisNova with a new globe icon and refreshed interface.
+- Added a universal calculator with basic and scientific modes, live results and history.
+- Updated the website, docs and desktop installers with the OrbisNova identity.
+- Kept the existing package and signing key, so this build updates over 1.2.1 and preserves your data.
+
+
 ## [1.2.1] - 2026-10-26
 
 - Android updates now download inside Omnia with a live progress bar instead of opening a browser.
