@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import { AppFooter } from '@/components/app-footer';
 import { useResponsive } from '@/lib/use-responsive';
 import { layout } from '@/features/theme/tokens';
 
@@ -23,7 +22,6 @@ export function Screen({
       keyboardShouldPersistTaps="handled">
       <View style={[styles.content, { maxWidth }]}>
         {children}
-        <AppFooter />
       </View>
     </ScrollView>
   );
@@ -38,3 +36,4 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+

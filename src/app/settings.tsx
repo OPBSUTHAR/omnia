@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Switch, View } from 'react-native';
 
+import { AppFooter } from '@/components/app-footer';
 import { AppText } from '@/components/ui/app-text';
 import { Button } from '@/components/ui/button';
 import { Badge, IconTile, Segmented } from '@/components/ui/controls';
@@ -299,7 +300,7 @@ export default function SettingsScreen() {
                 Feed
               </AppText>
               <AppText variant="mono" color={theme.textFaint} numberOfLines={1} selectable style={styles.feedValue}>
-                raw.githubusercontent.com/OPBSUTHAR/omnia/main/public/updates/latest.json
+                raw.githubusercontent.com/OPBSUTHAR/orbisnova/main/public/updates/latest.json
               </AppText>
             </View>
 
@@ -385,6 +386,7 @@ export default function SettingsScreen() {
           </Card>
         </View>
       </View>
+      <AppFooter />
     </Screen>
   );
 }
