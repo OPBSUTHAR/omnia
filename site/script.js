@@ -34,7 +34,7 @@
     if (link) {
       link.classList.add('disabled');
       link.setAttribute('aria-disabled', 'true');
-      link.href = 'https://github.com/OPBSUTHAR/omnia/releases';
+      link.href = 'https://github.com/OPBSUTHAR/orbisnova/releases';
       link.textContent = 'Shipping in v1.1.0';
     }
     var note = document.getElementById(noteId);

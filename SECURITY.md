@@ -15,7 +15,7 @@ preferences, notes and tool history are stored only on the device that created t
 Please do not open a public issue for a security problem. Use GitHub's private
 vulnerability reporting:
 
-https://github.com/OPBSUTHAR/omnia/security/advisories/new
+https://github.com/OPBSUTHAR/orbisnova/security/advisories/new
 
 Include the affected version, the platform (Android, web, desktop PWA), reproduction
 steps and the impact you believe it has. You can expect an acknowledgement within a few
@@ -26,7 +26,7 @@ days.
 In scope:
 
 - the Android APK published on GitHub Releases,
-- the web app at https://opbsuthar.github.io/omnia/,
+- the web app at https://opbsuthar.github.io/orbisnova/,
 - the update feed and service worker,
 - this source repository.
 

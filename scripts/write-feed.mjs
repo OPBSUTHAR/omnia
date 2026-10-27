@@ -35,18 +35,18 @@ if (!notes) {
   }
 }
 
-const repo = 'https://github.com/OPBSUTHAR/omnia';
+const repo = 'https://github.com/OPBSUTHAR/orbisnova';
 const versionedRelease = `${repo}/releases/tag/v${version}`;
 
 const feed = {
   version,
   releasedAt,
   notes: notes ?? ['Maintenance release with small fixes and polish.'],
-  apkUrl: 'https://opbsuthar.github.io/omnia/download/omnia.apk',
+  apkUrl: 'https://opbsuthar.github.io/orbisnova/download/omnia.apk',
   windowsUrl: `${repo}/releases/latest/download/omnia-windows.exe`,
   linuxUrl: `${repo}/releases/latest/download/omnia-linux.AppImage`,
   webUrl: 'https://omnia-suthara.vercel.app/',
-  docsUrl: 'https://opbsuthar.github.io/omnia/',
+  docsUrl: 'https://opbsuthar.github.io/orbisnova/',
   releasesUrl: versionedRelease,
   mandatory: false,
 };

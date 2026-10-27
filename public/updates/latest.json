@@ -7,11 +7,11 @@
     "Refresh the toolkit to five live utilities",
     "Same package, key and data preserved"
   ],
-  "apkUrl": "https://opbsuthar.github.io/omnia/download/omnia.apk",
-  "windowsUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-windows.exe",
-  "linuxUrl": "https://github.com/OPBSUTHAR/omnia/releases/latest/download/omnia-linux.AppImage",
+  "apkUrl": "https://opbsuthar.github.io/orbisnova/download/omnia.apk",
+  "windowsUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-windows.exe",
+  "linuxUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/latest/download/omnia-linux.AppImage",
   "webUrl": "https://omnia-suthara.vercel.app/",
-  "docsUrl": "https://opbsuthar.github.io/omnia/",
-  "releasesUrl": "https://github.com/OPBSUTHAR/omnia/releases/tag/v1.4.0",
+  "docsUrl": "https://opbsuthar.github.io/orbisnova/",
+  "releasesUrl": "https://github.com/OPBSUTHAR/orbisnova/releases/tag/v1.4.0",
   "mandatory": false
 }
